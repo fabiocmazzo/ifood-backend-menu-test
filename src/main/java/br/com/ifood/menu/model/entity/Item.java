@@ -1,7 +1,12 @@
 package br.com.ifood.menu.model.entity;
 
+import br.com.ifood.menu.model.relationship.HaveItem;
+import br.com.ifood.menu.model.relationship.HaveOptionGroup;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity
 public class Item {
@@ -16,6 +21,8 @@ public class Item {
     private String code;
 
     private String label;
+
+    private Set<HaveOptionGroup> haveOptionGroupSet;
 
     public Long getId() {
         return id;
@@ -39,5 +46,20 @@ public class Item {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Set<HaveOptionGroup> getHaveOptionGroupSet() {
+        return haveOptionGroupSet;
+    }
+
+    public void setHaveOptionGroupSet(Set<HaveOptionGroup> haveOptionGroupSet) {
+        this.haveOptionGroupSet = haveOptionGroupSet;
+    }
+
+    public void addHaveOptionGroup(HaveOptionGroup haveOptionGroup) {
+        if(this.haveOptionGroupSet == null) {
+            this.haveOptionGroupSet = new HashSet<>();
+        }
+        this.haveOptionGroupSet.add(haveOptionGroup);
     }
 }

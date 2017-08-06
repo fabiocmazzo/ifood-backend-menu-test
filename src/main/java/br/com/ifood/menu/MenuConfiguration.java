@@ -26,10 +26,4 @@ public class MenuConfiguration {
         return Redisson.create(config);
     }
 
-    @Bean
-    public Logger getLogger(InjectionPoint p) {
-        return Logger.getLogger(p.getClass().getCanonicalName());
-    }
-
-
 }

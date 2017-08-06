@@ -4,6 +4,10 @@ import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+/**
+ * ChainMenu Entity
+ * @author Fabio Covolo Mazzo
+ */
 @NodeEntity
 public class ChainMenu {
 

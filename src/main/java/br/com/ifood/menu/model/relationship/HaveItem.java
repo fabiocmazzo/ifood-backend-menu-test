@@ -6,6 +6,10 @@ import org.neo4j.ogm.annotation.*;
 
 import java.math.BigDecimal;
 
+/**
+ * HaveItem RelationShip ItemGroup -> Item
+ * @author Fabio Covolo Mazzo
+ */
 @RelationshipEntity(type = "HAVE_ITEM")
 public class HaveItem {
 

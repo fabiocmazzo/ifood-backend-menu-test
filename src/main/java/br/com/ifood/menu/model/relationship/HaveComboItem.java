@@ -4,6 +4,10 @@ import br.com.ifood.menu.model.entity.Item;
 import br.com.ifood.menu.model.entity.ItemCombo;
 import org.neo4j.ogm.annotation.*;
 
+/**
+ * HaveComboItem (ItemCombo -> Item) Relationship.
+ * @author Fabio Covolo Mazzo
+ */
 @RelationshipEntity(type="HAVE_COMBO_ITEM")
 public class HaveComboItem {
 

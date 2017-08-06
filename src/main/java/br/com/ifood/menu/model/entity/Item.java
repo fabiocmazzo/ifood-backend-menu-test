@@ -8,6 +8,10 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * ItemCombo Entity
+ * @author Fabio Covolo Mazzo
+ */
 @NodeEntity
 public class Item {
 

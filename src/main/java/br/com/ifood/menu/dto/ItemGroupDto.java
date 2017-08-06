@@ -2,6 +2,10 @@ package br.com.ifood.menu.dto;
 
 import java.util.List;
 
+/**
+ * ItemGroupDto Class.
+ * @author Fabio Covolo Mazzo
+ */
 public class ItemGroupDto {
 
     private String label;

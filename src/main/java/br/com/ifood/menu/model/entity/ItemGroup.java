@@ -1,6 +1,5 @@
 package br.com.ifood.menu.model.entity;
 
-import br.com.ifood.menu.model.relationship.HaveComboItem;
 import br.com.ifood.menu.model.relationship.HaveItem;
 import br.com.ifood.menu.model.relationship.HaveItemCombo;
 import org.neo4j.ogm.annotation.GraphId;
@@ -9,6 +8,10 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * ItemGroup Entity.
+ * @author Fabio Covolo Mazzo
+ */
 @NodeEntity
 public class ItemGroup {
 

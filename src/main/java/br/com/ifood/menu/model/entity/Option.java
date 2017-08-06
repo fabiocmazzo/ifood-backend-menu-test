@@ -3,6 +3,10 @@ package br.com.ifood.menu.model.entity;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+/**
+ * Option Entity
+ * @author Fabio Covolo Mazzo
+ */
 @NodeEntity
 public class Option {
 

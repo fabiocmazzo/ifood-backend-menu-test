@@ -1,12 +1,15 @@
 package br.com.ifood.menu.model.relationship;
 
-import br.com.ifood.menu.model.entity.Item;
 import br.com.ifood.menu.model.entity.ItemCombo;
 import br.com.ifood.menu.model.entity.ItemGroup;
 import org.neo4j.ogm.annotation.*;
 
 import java.math.BigDecimal;
 
+/**
+ * HaveItemCombo RelationShip. ItemGroup -> ItemCombo
+ * @author Fabio Covolo Mazzo
+ */
 @RelationshipEntity(type="HAVE_ITEM_COMBO")
 public class HaveItemCombo {
 

@@ -1,12 +1,10 @@
 package br.com.ifood.menu.dto;
 
-import br.com.ifood.menu.model.entity.Menu;
-import br.com.ifood.menu.model.relationship.HaveItemGroup;
-
 import java.util.List;
 
 /**
  * Class MenuDto for Menu response.
+ * @author Fabio Covolo Mazzo
  */
 public class MenuDto {
 

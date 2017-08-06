@@ -8,6 +8,10 @@ import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.StartNode;
 
+/**
+ * HaveComboItemOption RelationShip. (ItemCombo -> Option).
+ * @author Fabio Covolo Mazzo
+ */
 public class HaveComboItemOption {
 
     @GraphId

@@ -6,6 +6,10 @@ import org.neo4j.ogm.annotation.*;
 
 import java.math.BigDecimal;
 
+/**
+ * HaveOption Relationship. OptionGroup -> Option.
+ * @author Fabio Covolo Mazzo
+ */
 @RelationshipEntity(type="HAVE_OPTION")
 public class HaveOption {
 

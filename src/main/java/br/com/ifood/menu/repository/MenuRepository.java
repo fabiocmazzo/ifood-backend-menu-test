@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @author Fabio Covolo Mazzo
  */
 @Repository
-interface MenuRepository extends Neo4jRepository<Menu, Long> {
+public interface MenuRepository extends Neo4jRepository<Menu, Long> {
 
     Menu findByCode(String code);
 

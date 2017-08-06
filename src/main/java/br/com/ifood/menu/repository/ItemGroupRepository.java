@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @author Fabio Covolo Mazzo
  */
 @Repository
-interface ItemGroupRepository extends Neo4jRepository<ItemGroup, Long> {
+public interface ItemGroupRepository extends Neo4jRepository<ItemGroup, Long> {
 
 }

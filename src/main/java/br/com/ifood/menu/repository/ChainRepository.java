@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @author Fabio Covolo Mazzo
  */
 @Repository
-interface ChainRepository extends Neo4jRepository<Chain, Long> {
+public interface ChainRepository extends Neo4jRepository<Chain, Long> {
 
     Chain findByCode(String code);
 

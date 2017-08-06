@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @author Fabio Covolo Mazzo
  */
 @Repository
-interface ItemComboRepository extends Neo4jRepository<ItemRepository, Long> {
+public interface ItemComboRepository extends Neo4jRepository<ItemRepository, Long> {
 
     ItemRepository findByCode(String code);
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @author Fabio Covolo Mazzo
  */
 @Repository
-interface OptionRepository extends Neo4jRepository<Option, Long> {
+public interface OptionRepository extends Neo4jRepository<Option, Long> {
 
     Option findByCode(String code);
 

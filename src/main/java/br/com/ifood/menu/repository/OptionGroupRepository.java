@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @author Fabio Covolo Mazzo
  */
 @Repository
-interface OptionGroupRepository extends Neo4jRepository<OptionGroup, Long> {
+public interface OptionGroupRepository extends Neo4jRepository<OptionGroup, Long> {
 
 }

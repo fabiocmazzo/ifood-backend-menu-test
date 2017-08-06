@@ -12,6 +12,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.logging.Logger;
 
+/**
+ * MenuConfiguration Class.
+ * @author Fabio Covolo Mazzo
+ */
 @Configuration
 @ComponentScan
 public class MenuConfiguration {
@@ -20,6 +24,10 @@ public class MenuConfiguration {
     private String redisURI;
 
 
+    /**
+     * A factory for RedissonClient.
+     * @return redissonClient instance
+     */
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redisson() {
         Config config = new Config();

@@ -8,6 +8,9 @@ public class ItemGroupDto {
 
     private List<ItemDto> itemDtoList;
 
+    private List<ItemComboDto> itemComboDtoList;
+
+
     public String getLabel() {
         return label;
     }
@@ -22,5 +25,13 @@ public class ItemGroupDto {
 
     public void setItemDtoList(List<ItemDto> itemDtoList) {
         this.itemDtoList = itemDtoList;
+    }
+
+    public List<ItemComboDto> getItemComboDtoList() {
+        return itemComboDtoList;
+    }
+
+    public void setItemComboDtoList(List<ItemComboDto> itemComboDtoList) {
+        this.itemComboDtoList = itemComboDtoList;
     }
 }

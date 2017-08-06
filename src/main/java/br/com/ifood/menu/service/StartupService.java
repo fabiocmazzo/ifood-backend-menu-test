@@ -319,6 +319,11 @@ public class StartupService {
         comboItemOptionFanta.setItemCombo(porcaoMais2Refrigerantes);
         comboItemOptionFanta.setOption(option350ml);
 
+        HaveItemCombo haveItemComboPorcaoMais2Refrigerantes = new HaveItemCombo();
+        haveItemComboPorcaoMais2Refrigerantes.setItemCombo(porcaoMais2Refrigerantes);
+        haveItemComboPorcaoMais2Refrigerantes.setItemGroup(itemGroupPorcoes);
+        itemGroupPorcoes.addHaveItemCombo(haveItemComboPorcaoMais2Refrigerantes);
+
         restaurantRepository.save(restaurant);
         menuRepository.save(menu, -1);
         itemGroupRepository.save(itemGroupPorcoes);

@@ -17,6 +17,8 @@ public class ItemDto {
 
     private Integer order;
 
+    private Integer qty;
+
     private List<OptionGroupDto> optionGroupDtoList;
 
 
@@ -58,5 +60,13 @@ public class ItemDto {
 
     public void setOptionGroupDtoList(List<OptionGroupDto> optionGroupDtoList) {
         this.optionGroupDtoList = optionGroupDtoList;
+    }
+
+    public Integer getQty() {
+        return qty;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
     }
 }

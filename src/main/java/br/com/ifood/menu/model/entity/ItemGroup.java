@@ -2,6 +2,7 @@ package br.com.ifood.menu.model.entity;
 
 import br.com.ifood.menu.model.relationship.HaveComboItem;
 import br.com.ifood.menu.model.relationship.HaveItem;
+import br.com.ifood.menu.model.relationship.HaveItemCombo;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
@@ -19,7 +20,7 @@ public class ItemGroup {
     private Set<HaveItem> haveItemList;
 
 
-    private Set<HaveComboItem> haveComboItemList;
+    private Set<HaveItemCombo> haveItemComboList;
 
     public Long getId() {
         return id;
@@ -52,19 +53,18 @@ public class ItemGroup {
         this.haveItemList.add(haveItem);
     }
 
-    public Set<HaveComboItem> getHaveComboItemList() {
-        return haveComboItemList;
+    public Set<HaveItemCombo> getHaveItemComboList() {
+        return haveItemComboList;
     }
 
-    public void setHaveComboItemList(Set<HaveComboItem> haveComboItemList) {
-        this.haveComboItemList = haveComboItemList;
+    public void setHaveItemComboList(Set<HaveItemCombo> haveItemComboList) {
+        this.haveItemComboList = haveItemComboList;
     }
 
-
-    public void addHaveComboItemList(HaveComboItem haveComboItem) {
-        if(this.haveComboItemList == null) {
-            this.haveComboItemList = new HashSet<>();
+    public void addHaveItemCombo(HaveItemCombo haveItemCombo) {
+        if(this.haveItemComboList == null) {
+            this.haveItemComboList = new HashSet<>();
         }
-        this.haveComboItemList.add(haveComboItem);
+        this.haveItemComboList.add(haveItemCombo);
     }
 }

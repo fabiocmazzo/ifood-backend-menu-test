@@ -101,6 +101,7 @@ public class StartupService {
         itemBatataFrita.setLabel("Batata Frita");
 
 
+
         /**
          * Cria HaveItem
          */
@@ -164,12 +165,21 @@ public class StartupService {
         haveParmesao.setCanRepeat(true);
         haveParmesao.setOrder(2);
         haveParmesao.setPrice(new BigDecimal("4"));
-        haveParmesao.setOption(bacon);
+        haveParmesao.setOption(parmesao);
         haveParmesao.setOptionGroup(optionGroupAdicionais);
 
         optionGroupAdicionais.addHaveOption(haveBacon);
         optionGroupAdicionais.addHaveOption(haveParmesao);
 
+        HaveOptionGroup haveOptionGroupBatata = new HaveOptionGroup();
+        haveOptionGroupBatata.setOptionGroup(optionGroupAdicionais);
+        haveOptionGroupBatata.setItem(itemBatataFrita);
+        itemBatataFrita.addHaveOptionGroup(haveOptionGroupBatata);
+
+        HaveOptionGroup haveOptionGroupMandioca = new HaveOptionGroup();
+        haveOptionGroupMandioca.setOptionGroup(optionGroupAdicionais);
+        haveOptionGroupMandioca.setItem(itemMandiocaFrita);
+        itemMandiocaFrita.addHaveOptionGroup(haveOptionGroupMandioca);
 
         /**
          * Cria relacionamento itemGroup Bebidas com menu.
@@ -179,6 +189,8 @@ public class StartupService {
         haveItemGroupBebidas.setItemGroup(itemGroupBebidas);
         haveItemGroupBebidas.setMenu(menu);
         menu.addHaveItemGroup(haveItemGroupBebidas);
+
+
 
 
         /**
@@ -332,6 +344,8 @@ public class StartupService {
         itemGroupRepository.save(itemGroupPorcoes);
         itemRepository.save(itemMandiocaFrita);
         optionGroupRepository.save(optionGroupAdicionais);
+        optionRepository.save(bacon);
+        optionRepository.save(parmesao);
         itemRepository.save(itemBatataFrita);
         itemRepository.save(itemCocaCola);
         itemRepository.save(itemFanta);

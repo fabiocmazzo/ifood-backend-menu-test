@@ -29,4 +29,12 @@ public class ItemGroup {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    public HaveItem getHaveItem() {
+        return haveItem;
+    }
+
+    public void setHaveItem(HaveItem haveItem) {
+        this.haveItem = haveItem;
+    }
 }

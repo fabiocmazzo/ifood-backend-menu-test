@@ -6,6 +6,9 @@ import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Menu entity.
  * @author Fabio Covolo Mazzo
@@ -22,7 +25,7 @@ public class Menu {
     @Relationship(type = "BASED_ON_CHAIN_MENU")
     private ChainMenu chainMenu;
 
-    private HaveItemGroup haveItemGroup;
+    private List<HaveItemGroup> haveItemGroupList;
 
     public Long getId() {
         return id;
@@ -48,12 +51,19 @@ public class Menu {
         this.chainMenu = chainMenu;
     }
 
-    public HaveItemGroup getHaveItemGroup() {
-        return haveItemGroup;
+    public List<HaveItemGroup> getHaveItemGroupList() {
+        return haveItemGroupList;
     }
 
-    public void setHaveItemGroup(HaveItemGroup haveItemGroup) {
-        this.haveItemGroup = haveItemGroup;
+    public void setHaveItemGroupList(List<HaveItemGroup> haveItemGroupList) {
+        this.haveItemGroupList = haveItemGroupList;
+    }
+
+    public void addHaveItemGroup(HaveItemGroup haveItemGroup) {
+        if(haveItemGroupList == null) {
+            haveItemGroupList = new ArrayList<>();
+        }
+        haveItemGroupList.add(haveItemGroup);
     }
 }
 

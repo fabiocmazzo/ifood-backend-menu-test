@@ -4,6 +4,9 @@ import br.com.ifood.menu.model.relationship.HaveOption;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NodeEntity
 public class OptionGroup {
 
@@ -12,7 +15,7 @@ public class OptionGroup {
 
     private String label;
 
-    private HaveOption haveOption;
+    private List<HaveOption> haveOptionList;
 
     public Long getId() {
         return id;
@@ -30,11 +33,20 @@ public class OptionGroup {
         this.label = label;
     }
 
-    public HaveOption getHaveOption() {
-        return haveOption;
+    public List<HaveOption> getHaveOptionList() {
+        return haveOptionList;
     }
 
-    public void setHaveOption(HaveOption haveOption) {
-        this.haveOption = haveOption;
+    public void setHaveOptionList(List<HaveOption> haveOptionList) {
+        this.haveOptionList = haveOptionList;
     }
+
+    public void addHaveOption(HaveOption haveOption) {
+        if(haveOptionList == null) {
+            haveOptionList = new ArrayList<>();
+        }
+        haveOptionList.add(haveOption);
+    }
+
+
 }

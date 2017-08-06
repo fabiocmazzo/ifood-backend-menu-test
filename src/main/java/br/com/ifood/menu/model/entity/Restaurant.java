@@ -57,4 +57,20 @@ public class Restaurant {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Chain getChain() {
+        return chain;
+    }
+
+    public void setChain(Chain chain) {
+        this.chain = chain;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 }

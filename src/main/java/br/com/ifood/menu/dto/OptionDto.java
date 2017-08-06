@@ -1,12 +1,13 @@
 package br.com.ifood.menu.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Class optionDto to exposed Option to world.
  * @author Fabio Covolo Mazzo
  */
-public class OptionDto {
+public class OptionDto implements Serializable {
 
     private String label;
 

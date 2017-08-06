@@ -1,12 +1,13 @@
 package br.com.ifood.menu.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * OptionGroup Dto
  * @author Fabio Covolo Mazzo
  */
-public class OptionGroupDto {
+public class OptionGroupDto implements Serializable {
 
     private String label;
 

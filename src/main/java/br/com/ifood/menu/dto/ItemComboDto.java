@@ -1,5 +1,6 @@
 package br.com.ifood.menu.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Map;
  * Class ItemComboDto to expose ItemCombo to World.
  * @author Fabio Covolo Mazzo
  */
-public class ItemComboDto {
+public class ItemComboDto implements Serializable {
 
     private String label;
 

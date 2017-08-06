@@ -1,13 +1,13 @@
 package br.com.ifood.menu.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Class MenuDto for Menu response.
  * @author Fabio Covolo Mazzo
  */
-public class MenuDto {
-
+public class MenuDto implements Serializable {
 
   private String code;
 

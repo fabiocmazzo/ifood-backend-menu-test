@@ -1,5 +1,6 @@
 package br.com.ifood.menu.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * ItemDto class.
  * @author Fabio Covolo Mazzo
  */
-public class ItemDto {
+public class ItemDto implements Serializable {
 
     private String code;
 

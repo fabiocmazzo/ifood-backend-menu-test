@@ -319,10 +319,6 @@ public class StartupService {
         comboItemOptionFanta.setItemCombo(porcaoMais2Refrigerantes);
         comboItemOptionFanta.setOption(option350ml);
 
-
-
-
-
         restaurantRepository.save(restaurant);
         menuRepository.save(menu, -1);
         itemGroupRepository.save(itemGroupPorcoes);
@@ -339,7 +335,6 @@ public class StartupService {
         optionRepository.save(option2L);
         commonItemPoolRepository.save(commonItemBebidas);
         itemComboRepository.save(porcaoMais2Refrigerantes);
-
     }
 
 

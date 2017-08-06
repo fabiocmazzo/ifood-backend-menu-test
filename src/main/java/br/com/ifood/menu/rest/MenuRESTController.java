@@ -3,6 +3,7 @@ package br.com.ifood.menu.rest;
 import br.com.ifood.menu.dto.MenuDto;
 import br.com.ifood.menu.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,9 +19,10 @@ public class MenuRESTController {
 
     /**
      * Get menuDto by restaurantCode
-     * @param code RestaurantCode;
+     * @param restaurantCode The Restaurant Code;
      * @return menuDTO
      */
+    @RequestMapping("/rest/menu")
     public MenuDto getMenu(@RequestParam(value="code") String restaurantCode) {
         return menuService.getMenuDTO(restaurantCode);
     }

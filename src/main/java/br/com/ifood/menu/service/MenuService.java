@@ -4,6 +4,7 @@ import br.com.ifood.menu.dto.MenuDto;
 import br.com.ifood.menu.dto.adapter.MenuAdapter;
 import br.com.ifood.menu.model.entity.Menu;
 import br.com.ifood.menu.model.entity.Restaurant;
+import br.com.ifood.menu.repository.MenuRepository;
 import br.com.ifood.menu.repository.RestaurantRepository;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
@@ -25,6 +26,9 @@ public class MenuService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
+    @Autowired
+    private MenuRepository menuRepository;
+
 
     @Autowired
     private RedissonClient redissonClient;
@@ -42,8 +46,8 @@ public class MenuService {
         Restaurant restaurant = restaurantRepository.findByCode(restaurantCode);
         // Return empty menu if not found
         Menu menu = new Menu();
-        if(restaurant != null) {
-            menu = restaurant.getMenu();
+        if(restaurant != null && restaurant.getMenu() != null) {
+            menu = menuRepository.findOne(restaurant.getMenu().getId(), -1);
         }
         return menu;
     }
@@ -57,13 +61,16 @@ public class MenuService {
      */
     public MenuDto getMenuDTO(String restaurantCode) {
         // Verify if apapted object is persisted in REDIS
-        RBucket<MenuDto> bucket = redissonClient.getBucket(restaurantCode);
-        MenuDto menuDto = bucket.get();
+       // RBucket<MenuDto> bucket = redissonClient.getBucket(restaurantCode);
+        //MenuDto menuDto = bucket.get();
+        //Comentado para testar a lógica sem o REDIS
+        //TODO:retornar o Redis e rodar testes de carga e performance após finalizar a lógica
+        MenuDto menuDto = null;
         if (menuDto != null) {
             return menuDto;
         }
         menuDto = MenuAdapter.adapt(getMenu(restaurantCode));
-        bucket.set(menuDto, redisSecondsTTL, TimeUnit.SECONDS);
+        //bucket.set(menuDto, redisSecondsTTL, TimeUnit.SECONDS);
         return menuDto;
     }
 }

@@ -25,6 +25,7 @@ public class Menu {
     @Relationship(type = "BASED_ON_CHAIN_MENU")
     private ChainMenu chainMenu;
 
+    @Relationship(type = "HAVE_ITEM_GROUP")
     private List<HaveItemGroup> haveItemGroupList;
 
     public Long getId() {

@@ -360,6 +360,6 @@ public class StartupService {
 
     @PostConstruct
     public void init() {
-        createTestData();
+        //createTestData();
     }
 }

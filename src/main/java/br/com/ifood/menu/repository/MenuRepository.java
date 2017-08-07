@@ -1,6 +1,7 @@
 package br.com.ifood.menu.repository;
 
 import br.com.ifood.menu.model.entity.Menu;
+import org.springframework.data.neo4j.annotation.Depth;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuRepository extends Neo4jRepository<Menu, Long> {
 
+    @Depth(-1)
     Menu findByCode(String code);
 
 }

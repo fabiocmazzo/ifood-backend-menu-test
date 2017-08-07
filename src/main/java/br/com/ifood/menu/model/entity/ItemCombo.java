@@ -4,6 +4,7 @@ import br.com.ifood.menu.model.relationship.HaveComboItem;
 import br.com.ifood.menu.model.relationship.HaveComboItemOption;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,8 +19,10 @@ public class ItemCombo {
 
     private String code;
 
+    @Relationship(type = "HAVE_COMBO_ITEM")
     private Set<HaveComboItem> haveComboItemSet;
 
+    @Relationship(type = "HAVE_COMBO_ITEM_OPTION")
     private Set<HaveComboItemOption> haveComboItemOptionSet;
 
     public Long getId() {

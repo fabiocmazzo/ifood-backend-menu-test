@@ -3,15 +3,13 @@ package br.com.ifood.menu.model.relationship;
 import br.com.ifood.menu.model.entity.Item;
 import br.com.ifood.menu.model.entity.ItemCombo;
 import br.com.ifood.menu.model.entity.Option;
-import org.neo4j.ogm.annotation.EndNode;
-import org.neo4j.ogm.annotation.GraphId;
-import org.neo4j.ogm.annotation.Property;
-import org.neo4j.ogm.annotation.StartNode;
+import org.neo4j.ogm.annotation.*;
 
 /**
  * HaveComboItemOption RelationShip. (ItemCombo -> Option).
  * @author Fabio Covolo Mazzo
  */
+@RelationshipEntity(type = "HAVE_COMBO_ITEM_OPTION")
 public class HaveComboItemOption {
 
     @GraphId

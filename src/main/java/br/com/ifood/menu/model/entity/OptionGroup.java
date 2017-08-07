@@ -3,6 +3,7 @@ package br.com.ifood.menu.model.entity;
 import br.com.ifood.menu.model.relationship.HaveOption;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class OptionGroup {
 
     private String label;
 
+    @Relationship(type = "HAVE_OPTION")
     private List<HaveOption> haveOptionList;
 
     public Long getId() {

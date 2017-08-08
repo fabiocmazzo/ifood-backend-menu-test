@@ -1,5 +1,8 @@
 package br.com.ifood.menu.dto;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -69,5 +72,35 @@ public class ItemComboDto implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ItemComboDto that = (ItemComboDto) o;
+
+        return new EqualsBuilder()
+                .append(label, that.label)
+                .append(code, that.code)
+                .append(itemDtoList, that.itemDtoList)
+                .append(itemDtoOptionDtoMap, that.itemDtoOptionDtoMap)
+                .append(price, that.price)
+                .append(available, that.available)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(label)
+                .append(code)
+                .append(itemDtoList)
+                .append(itemDtoOptionDtoMap)
+                .append(price)
+                .append(available)
+                .toHashCode();
     }
 }

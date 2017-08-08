@@ -55,16 +55,13 @@ public class MenuService {
      */
     public MenuDto getMenuDTO(String restaurantCode) {
         // Verify if apapted object is persisted in REDIS
-       // RBucket<MenuDto> bucket = redissonClient.getBucket(restaurantCode);
-        //MenuDto menuDto = bucket.get();
-        //Comentado para testar a lógica sem o REDIS
-        //TODO:retornar o Redis e rodar testes de carga e performance após finalizar a lógica
-        MenuDto menuDto = null;
+        RBucket<MenuDto> bucket = redissonClient.getBucket(restaurantCode);
+        MenuDto menuDto = bucket.get();
         if (menuDto != null) {
             return menuDto;
         }
         menuDto = MenuAdapter.adapt(getMenu(restaurantCode));
-        //bucket.set(menuDto, redisSecondsTTL, TimeUnit.SECONDS);
+        bucket.set(menuDto, redisSecondsTTL, TimeUnit.SECONDS);
         return menuDto;
     }
 }

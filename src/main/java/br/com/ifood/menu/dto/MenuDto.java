@@ -1,5 +1,8 @@
 package br.com.ifood.menu.dto;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -37,5 +40,29 @@ public class MenuDto implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MenuDto menuDto = (MenuDto) o;
+
+        return new EqualsBuilder()
+                .append(code, menuDto.code)
+                .append(itemGroupDtoList, menuDto.itemGroupDtoList)
+                .append(available, menuDto.available)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(code)
+                .append(itemGroupDtoList)
+                .append(available)
+                .toHashCode();
     }
 }

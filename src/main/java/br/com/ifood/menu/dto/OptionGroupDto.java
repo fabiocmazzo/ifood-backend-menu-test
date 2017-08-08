@@ -15,6 +15,8 @@ public class OptionGroupDto implements Serializable {
 
     private List<OptionDto> optionDtoList;
 
+    private Boolean available;
+
     public String getLabel() {
         return label;
     }
@@ -37,5 +39,13 @@ public class OptionGroupDto implements Serializable {
 
     public void setOptionDtoList(List<OptionDto> optionDtoList) {
         this.optionDtoList = optionDtoList;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

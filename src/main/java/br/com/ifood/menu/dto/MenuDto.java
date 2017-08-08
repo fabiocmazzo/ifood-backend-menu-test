@@ -13,6 +13,8 @@ public class MenuDto implements Serializable {
 
   private List<ItemGroupDto> itemGroupDtoList;
 
+    private Boolean available;
+
     public String getCode() {
         return code;
     }
@@ -27,5 +29,13 @@ public class MenuDto implements Serializable {
 
     public void setItemGroupDtoList(List<ItemGroupDto> itemGroupDtoList) {
         this.itemGroupDtoList = itemGroupDtoList;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

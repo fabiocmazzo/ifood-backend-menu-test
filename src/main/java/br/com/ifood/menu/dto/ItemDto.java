@@ -22,6 +22,7 @@ public class ItemDto implements Serializable {
 
     private List<OptionGroupDto> optionGroupDtoList;
 
+    private Boolean available;
 
     public String getCode() {
         return code;
@@ -69,5 +70,13 @@ public class ItemDto implements Serializable {
 
     public void setQty(Integer qty) {
         this.qty = qty;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

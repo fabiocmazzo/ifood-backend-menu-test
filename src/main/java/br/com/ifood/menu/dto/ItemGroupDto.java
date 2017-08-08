@@ -15,6 +15,7 @@ public class ItemGroupDto implements Serializable {
 
     private List<ItemComboDto> itemComboDtoList;
 
+    private Boolean available;
 
     public String getLabel() {
         return label;
@@ -38,5 +39,13 @@ public class ItemGroupDto implements Serializable {
 
     public void setItemComboDtoList(List<ItemComboDto> itemComboDtoList) {
         this.itemComboDtoList = itemComboDtoList;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

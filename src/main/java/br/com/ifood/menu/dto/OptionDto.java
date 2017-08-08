@@ -22,6 +22,8 @@ public class OptionDto implements Serializable {
 
     private BigDecimal price;
 
+    private Boolean available;
+
     public String getLabel() {
         return label;
     }
@@ -60,5 +62,13 @@ public class OptionDto implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

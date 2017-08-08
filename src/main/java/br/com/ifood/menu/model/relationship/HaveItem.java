@@ -22,6 +22,15 @@ public class HaveItem {
     @Property
     private Integer order;
 
+    @Property
+    private String chainCode;
+
+    @Property
+    private String restaurantCode;
+
+    @Property
+    private Boolean available;
+
     @StartNode
     private ItemGroup itemGroup;
 
@@ -66,5 +75,29 @@ public class HaveItem {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public String getChainCode() {
+        return chainCode;
+    }
+
+    public void setChainCode(String chainCode) {
+        this.chainCode = chainCode;
+    }
+
+    public String getRestaurantCode() {
+        return restaurantCode;
+    }
+
+    public void setRestaurantCode(String restaurantCode) {
+        this.restaurantCode = restaurantCode;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

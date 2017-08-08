@@ -9,11 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * ItemCombo Entity
+ * Template Entity
  * @author Fabio Covolo Mazzo
  */
 @NodeEntity
-public class Item {
+public class Template {
 
     @GraphId
     private Long id;
@@ -24,14 +24,10 @@ public class Item {
      */
     private String code;
 
-    private String label;
+    private String description;
 
     @Relationship(type = "HAVE_OPTION_GROUP")
     private Set<HaveOptionGroup> haveOptionGroupSet;
-
-
-    @Relationship(type = "IMPLEMENTS_TEMPLATE")
-    private Template template;
 
     public Long getId() {
         return id;
@@ -41,12 +37,12 @@ public class Item {
         this.id = id;
     }
 
-    public String getLabel() {
-        return label;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCode() {
@@ -70,13 +66,5 @@ public class Item {
             this.haveOptionGroupSet = new HashSet<>();
         }
         this.haveOptionGroupSet.add(haveOptionGroup);
-    }
-
-    public Template getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(Template template) {
-        this.template = template;
     }
 }

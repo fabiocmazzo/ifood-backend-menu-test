@@ -28,6 +28,15 @@ public class HaveItemCombo {
     @EndNode
     private ItemCombo itemCombo;
 
+    @Property
+    private String chainCode;
+
+    @Property
+    private String restaurantCode;
+
+    @Property
+    private Boolean available;
+
     public Long getId() {
         return id;
     }
@@ -66,5 +75,29 @@ public class HaveItemCombo {
 
     public void setItemCombo(ItemCombo itemCombo) {
         this.itemCombo = itemCombo;
+    }
+
+    public String getChainCode() {
+        return chainCode;
+    }
+
+    public void setChainCode(String chainCode) {
+        this.chainCode = chainCode;
+    }
+
+    public String getRestaurantCode() {
+        return restaurantCode;
+    }
+
+    public void setRestaurantCode(String restaurantCode) {
+        this.restaurantCode = restaurantCode;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

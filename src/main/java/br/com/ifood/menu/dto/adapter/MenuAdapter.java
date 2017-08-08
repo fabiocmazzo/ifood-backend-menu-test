@@ -24,7 +24,6 @@ public class MenuAdapter {
      */
     private static OptionDto adapt(HaveOption haveOption) {
         OptionDto optionDto = new OptionDto();
-        optionDto.setCanRepeat(haveOption.getCanRepeat());
         optionDto.setLabel(haveOption.getOption().getLabel());
         optionDto.setOrder(haveOption.getOrder());
         optionDto.setPrice(haveOption.getPrice());
@@ -123,8 +122,8 @@ public class MenuAdapter {
             itemGroupDto.setItemDtoList(itemDtoList);
         }
 
-        if (haveItemGroup.getItemGroup().getHaveItemComboList() != null) {
-            List<ItemComboDto> itemComboDtoList = haveItemGroup.getItemGroup().getHaveItemComboList().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
+        if (haveItemGroup.getItemGroup().getHaveItemComboSet() != null) {
+            List<ItemComboDto> itemComboDtoList = haveItemGroup.getItemGroup().getHaveItemComboSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
             itemGroupDto.setItemComboDtoList(itemComboDtoList);
         }
 

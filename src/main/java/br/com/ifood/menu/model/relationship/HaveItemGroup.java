@@ -17,7 +17,13 @@ public class HaveItemGroup {
     private ItemGroup itemGroup;
 
     @Property
-    private Boolean active;
+    private Boolean available;
+
+    @Property
+    private String restaurantCode;
+
+    @Property
+    private String chainCode;
 
     public Long getId() {
         return id;
@@ -43,11 +49,27 @@ public class HaveItemGroup {
         this.itemGroup = itemGroup;
     }
 
-    public Boolean getActive() {
-        return active;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public String getRestaurantCode() {
+        return restaurantCode;
+    }
+
+    public void setRestaurantCode(String restaurantCode) {
+        this.restaurantCode = restaurantCode;
+    }
+
+    public String getChainCode() {
+        return chainCode;
+    }
+
+    public void setChainCode(String chainCode) {
+        this.chainCode = chainCode;
     }
 }

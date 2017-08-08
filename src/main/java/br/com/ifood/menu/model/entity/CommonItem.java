@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * CommonItemPool Neo4J Entity.
+ * CommonItem Neo4J Entity.
  * @author Fabio Covolo Mazzo
  */
-public class CommonItemPool {
+public class CommonItem {
 
     @GraphId
     private Long id;
@@ -20,7 +20,7 @@ public class CommonItemPool {
     private String code;
 
     @Relationship(type = "HAVE_COMMON_ITEM")
-    private List<CommonItem> commonItemList;
+    private List<Item> itemList;
 
     public Long getId() {
         return id;
@@ -38,18 +38,18 @@ public class CommonItemPool {
         this.code = code;
     }
 
-    public List<CommonItem> getCommonItemList() {
-        return commonItemList;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
-    public void setCommonItemList(List<CommonItem> commonItemList) {
-        this.commonItemList = commonItemList;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
-    public void addCommonItem(CommonItem commonItem) {
-        if(this.commonItemList == null) {
-            this.commonItemList = new ArrayList<>();
+    public void addItem(Item item) {
+        if(this.itemList == null) {
+            this.itemList = new ArrayList<>();
         }
-        this.commonItemList.add(commonItem);
+        this.itemList.add(item);
     }
 }

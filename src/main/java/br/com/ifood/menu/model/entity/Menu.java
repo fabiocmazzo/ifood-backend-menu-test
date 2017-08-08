@@ -22,9 +22,6 @@ public class Menu {
     @Index(unique = true)
     private String code;
 
-    @Relationship(type = "BASED_ON_CHAIN_MENU")
-    private ChainMenu chainMenu;
-
     @Relationship(type = "HAVE_ITEM_GROUP")
     private List<HaveItemGroup> haveItemGroupList;
 
@@ -42,14 +39,6 @@ public class Menu {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public ChainMenu getChainMenu() {
-        return chainMenu;
-    }
-
-    public void setChainMenu(ChainMenu chainMenu) {
-        this.chainMenu = chainMenu;
     }
 
     public List<HaveItemGroup> getHaveItemGroupList() {

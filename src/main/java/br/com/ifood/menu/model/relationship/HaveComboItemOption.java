@@ -7,6 +7,7 @@ import org.neo4j.ogm.annotation.*;
 
 /**
  * HaveComboItemOption RelationShip. (ItemCombo -> Option).
+ *
  * @author Fabio Covolo Mazzo
  */
 @RelationshipEntity(type = "HAVE_COMBO_ITEM_OPTION")
@@ -22,7 +23,16 @@ public class HaveComboItemOption {
     private Integer order;
 
     @Property
-    private Item item;
+    private String itemCode;
+
+    @Property
+    private String chainCode;
+
+    @Property
+    private String restaurantCode;
+
+    @Property
+    private Boolean available;
 
     @StartNode
     private ItemCombo itemCombo;
@@ -54,12 +64,28 @@ public class HaveComboItemOption {
         this.order = order;
     }
 
-    public Item getItem() {
-        return item;
+    public String getItemCode() {
+        return itemCode;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
+
+    public String getChainCode() {
+        return chainCode;
+    }
+
+    public void setChainCode(String chainCode) {
+        this.chainCode = chainCode;
+    }
+
+    public String getRestaurantCode() {
+        return restaurantCode;
+    }
+
+    public void setRestaurantCode(String restaurantCode) {
+        this.restaurantCode = restaurantCode;
     }
 
     public ItemCombo getItemCombo() {
@@ -76,5 +102,13 @@ public class HaveComboItemOption {
 
     public void setOption(Option option) {
         this.option = option;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

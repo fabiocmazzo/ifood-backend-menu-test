@@ -43,13 +43,7 @@ public class MenuService {
      * @return Menu entity
      */
     private Menu getMenu(String restaurantCode) {
-        Restaurant restaurant = restaurantRepository.findByCode(restaurantCode);
-        // Return empty menu if not found
-        Menu menu = new Menu();
-        if(restaurant != null && restaurant.getMenu() != null) {
-            menu = menuRepository.findOne(restaurant.getMenu().getId(), -1);
-        }
-        return menu;
+          return menuRepository.findRelated(restaurantCode);
     }
 
 

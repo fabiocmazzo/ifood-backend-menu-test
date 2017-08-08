@@ -8,6 +8,10 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * OptionGroup Neo4J Entity.
+ * @author Fabio Covolo Mazzo
+ */
 @NodeEntity
 public class OptionGroup {
 

@@ -9,6 +9,10 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * ItemCombo Neo4J Entity.
+ * @author Fabio Covolo Mazzo
+ */
 @NodeEntity
 public class ItemCombo {
 

@@ -1,6 +1,7 @@
 package br.com.ifood.menu.repository;
 
 import br.com.ifood.menu.model.entity.Restaurant;
+import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface RestaurantRepository extends Neo4jRepository<Restaurant, Long> {
 
     Restaurant findByCode(String code);
+
 
 }

@@ -19,13 +19,15 @@ public class ItemGroup {
     @GraphId
     private Long id;
 
+    private String code;
+
     private String label;
 
     @Relationship(type="HAVE_ITEM")
     private Set<HaveItem> haveItemList;
 
     @Relationship(type="HAVE_ITEM_COMBO")
-    private Set<HaveItemCombo> haveItemComboList;
+    private Set<HaveItemCombo> haveItemComboSet;
 
     public Long getId() {
         return id;
@@ -33,6 +35,14 @@ public class ItemGroup {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getLabel() {
@@ -58,18 +68,18 @@ public class ItemGroup {
         this.haveItemList.add(haveItem);
     }
 
-    public Set<HaveItemCombo> getHaveItemComboList() {
-        return haveItemComboList;
+    public Set<HaveItemCombo> getHaveItemComboSet() {
+        return haveItemComboSet;
     }
 
-    public void setHaveItemComboList(Set<HaveItemCombo> haveItemComboList) {
-        this.haveItemComboList = haveItemComboList;
+    public void setHaveItemComboSet(Set<HaveItemCombo> haveItemComboSet) {
+        this.haveItemComboSet = haveItemComboSet;
     }
 
     public void addHaveItemCombo(HaveItemCombo haveItemCombo) {
-        if(this.haveItemComboList == null) {
-            this.haveItemComboList = new HashSet<>();
+        if(this.haveItemComboSet == null) {
+            this.haveItemComboSet = new HashSet<>();
         }
-        this.haveItemComboList.add(haveItemCombo);
+        this.haveItemComboSet.add(haveItemCombo);
     }
 }

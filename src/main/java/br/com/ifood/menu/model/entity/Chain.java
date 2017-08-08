@@ -20,8 +20,8 @@ public class Chain {
 
     private String name;
 
-    @Relationship(type = "HAVE_CHAIN_MENU")
-    private ChainMenu chainMenu;
+    @Relationship(type = "HAVE_MENU")
+    private Menu menu;
 
 
     /**
@@ -56,11 +56,11 @@ public class Chain {
         this.name = name;
     }
 
-    public ChainMenu getChainMenu() {
-        return chainMenu;
+    public Menu getMenu() {
+        return menu;
     }
 
-    public void setChainMenu(ChainMenu chainMenu) {
-        this.chainMenu = chainMenu;
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

@@ -17,19 +17,28 @@ public class HaveOption {
     private Long id;
 
     @Property
-    private Boolean canRepeat;
-
-    @Property
     private Integer order;
 
     @Property
+    private BigDecimal additionalPrice;
+
+    @Property
     private BigDecimal price;
+
+    @Property
+    private String chainCode;
+
+    @Property
+    private String restaurantCode;
 
     @StartNode
     private OptionGroup optionGroup;
 
     @EndNode
     private Option option;
+
+    @Property
+    private Boolean available;
 
     public Long getId() {
         return id;
@@ -39,20 +48,20 @@ public class HaveOption {
         this.id = id;
     }
 
-    public Boolean getCanRepeat() {
-        return canRepeat;
-    }
-
-    public void setCanRepeat(Boolean canRepeat) {
-        this.canRepeat = canRepeat;
-    }
-
     public Integer getOrder() {
         return order;
     }
 
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    public BigDecimal getAdditionalPrice() {
+        return additionalPrice;
+    }
+
+    public void setAdditionalPrice(BigDecimal additionalPrice) {
+        this.additionalPrice = additionalPrice;
     }
 
     public BigDecimal getPrice() {
@@ -77,5 +86,29 @@ public class HaveOption {
 
     public void setOption(Option option) {
         this.option = option;
+    }
+
+    public String getChainCode() {
+        return chainCode;
+    }
+
+    public void setChainCode(String chainCode) {
+        this.chainCode = chainCode;
+    }
+
+    public String getRestaurantCode() {
+        return restaurantCode;
+    }
+
+    public void setRestaurantCode(String restaurantCode) {
+        this.restaurantCode = restaurantCode;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

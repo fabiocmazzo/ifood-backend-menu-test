@@ -22,8 +22,6 @@ public class OptionDto implements Serializable {
 
     private Integer order;
 
-    private BigDecimal price;
-
     private BigDecimal additionalPrice;
 
     private Boolean available;
@@ -62,14 +60,6 @@ public class OptionDto implements Serializable {
 
     public void setOrder(Integer order) {
         this.order = order;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     public BigDecimal getAdditionalPrice() {

@@ -27,9 +27,9 @@ public class ItemDto implements Serializable {
 
     private Integer qty;
 
-    private List<OptionGroupDto> optionGroupDtoList;
-
     private Boolean available;
+
+    private List<OptionGroupDto> optionGroupDtoList;
 
     public Long getId() {
         return id;

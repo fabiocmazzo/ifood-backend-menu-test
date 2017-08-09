@@ -46,6 +46,12 @@ public class StartupService {
 
     private void createFictionalRestaurantMenu() {
 
+        // If is already persisted, dont include again
+        Menu menuExists =  menuRepository.findRelated("Hitchhiker_Restaurant");
+
+        if(menuExists != null) {
+            return;
+        }
         /**
          * Chain
          */
@@ -213,12 +219,16 @@ public class StartupService {
         beverageOptionGroup.setType(OptionGroupType.OPTION_GROUP);
 
 
+
         /**
          * Option Soda
          */
         Option optionSoda = new Option();
         optionSoda.setLabel("Soda");
         optionSoda.setCode("OPTION_SODA");
+        optionSoda.setCanRepeatForOptionGroup(false);
+        optionSoda.setMinOptionForOptionGroup(0);
+        optionSoda.setMinOptionForOptionGroup(1);
         beverageOptionGroup.createHaveOption(optionSoda, 1, true, BigDecimal.ZERO, true, chain.getCode(), null);
 
 
@@ -251,13 +261,18 @@ public class StartupService {
         Option optionJuice = new Option();
         optionJuice.setLabel("Soda");
         optionJuice.setCode("OPTION_SODA");
+        optionJuice.setCanRepeatForOptionGroup(false);
+        optionJuice.setMinOptionForOptionGroup(0);
+        optionJuice.setMinOptionForOptionGroup(1);
+
         beverageOptionGroup.createHaveOption(optionJuice, 2, true, BigDecimal.ONE, true, chain.getCode(), null);
 
 
         OptionGroup optionGroupJuice = new OptionGroup();
         optionGroupJuice.setType(OptionGroupType.ITEM);
-        optionGroupJuice.setCode("OPTION_GROUP_SODA");
-        optionGroupJuice.setLabel("Soda");
+        optionGroupJuice.setCode("OPTION_GROUP_JUICE");
+        optionGroupJuice.setLabel("Juice");
+
         optionJuice.setOptionGroup(optionGroupJuice);
 
         Item itemOrangeJuice = new Item();
@@ -332,6 +347,6 @@ public class StartupService {
 
     @PostConstruct
     public void init() {
-        //createTestData();
+        createTestData();
     }
 }

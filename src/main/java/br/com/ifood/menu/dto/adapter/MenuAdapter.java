@@ -79,7 +79,7 @@ public class MenuAdapter {
         ItemComboDto itemComboDto = new ItemComboDto();
         itemComboDto.setCode(haveItemCombo.getItemCombo().getCode());
         itemComboDto.setLabel(haveItemCombo.getItemCombo().getLabel());
-        itemComboDto.setPrice(haveItemCombo.getPrice());
+       // itemComboDto.setPrice(haveItemCombo.getStartPrice());
         if (haveItemCombo.getItemCombo().getHaveComboItemSet() != null) {
             List<ItemDto> itemDtoList = haveItemCombo.getItemCombo().getHaveComboItemSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
             itemComboDto.setItemDtoList(itemDtoList);

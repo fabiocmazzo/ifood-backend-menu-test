@@ -78,6 +78,15 @@ public class StartupService {
         burgersGroup.setLabel("Burgers");
         menuChain.createHaveItemGroup(true, burgersGroup, chain.getCode(), null);
 
+        /**
+         *  ItemGroups
+         */
+        ItemGroup comboItemGroup = new ItemGroup();
+        comboItemGroup.setCode("COMBOS");
+        comboItemGroup.setLabel("Combos");
+        menuChain.createHaveItemGroup(true, comboItemGroup, chain.getCode(), null);
+
+
 
 
         ItemGroup snacksGroup = new ItemGroup();
@@ -172,9 +181,7 @@ public class StartupService {
         comboN5.setLabel("Combo nº5");
         comboN5.setCode("COMBON5");
         comboN5.createHaveComboItem(itemDoubleCheeseBurger, true, BigDecimal.ZERO, null, 1, 1, chain.getCode(), null);
-        comboN5.createHaveComboOptionGroup(optionGroupBurgerExtras, true, 2, null, true, 1, chain.getCode(), restaurant.getCode());
-
-
+        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("17"), chain.getCode(), null);
 
         OptionGroup sideDishOptionGroup = new OptionGroup();
         sideDishOptionGroup.setCode("OG_SIDE_DISH");
@@ -313,6 +320,7 @@ public class StartupService {
         itemGroupRepository.save(drinksGroup);
         itemGroupRepository.save(snacksGroup);
         itemGroupRepository.save(burgersGroup);
+        itemGroupRepository.save(comboItemGroup);
         menuRepository.save(menuChain);
         restaurantRepository.save(restaurant);
         chainRepository.save(chain);

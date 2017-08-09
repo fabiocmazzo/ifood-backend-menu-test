@@ -97,4 +97,16 @@ public class ItemGroup {
         }
         this.haveItemComboSet.add(haveItemCombo);
     }
+
+    public void createHaveItemCombo(ItemCombo itemCombo, Integer order, Boolean available, BigDecimal startPrice, String chainCode, String restaurantCode) {
+        HaveItemCombo haveItemCombo = new HaveItemCombo();
+        haveItemCombo.setItemGroup(this);
+        haveItemCombo.setItemCombo(itemCombo);
+        haveItemCombo.setOrder(order);
+        haveItemCombo.setAvailable(available);
+        haveItemCombo.setChainCode(chainCode);
+        haveItemCombo.setRestaurantCode(restaurantCode);
+        haveItemCombo.setStartPrice(startPrice);
+        this.addHaveItemCombo(haveItemCombo);
+    }
 }

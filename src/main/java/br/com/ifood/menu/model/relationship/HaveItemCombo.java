@@ -17,7 +17,7 @@ public class HaveItemCombo {
     private Long id;
 
     @Property
-    private BigDecimal price;
+    private BigDecimal startPrice;
 
     @Property
     private Integer order;
@@ -45,12 +45,12 @@ public class HaveItemCombo {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getStartPrice() {
+        return startPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setStartPrice(BigDecimal startPrice) {
+        this.startPrice = startPrice;
     }
 
     public Integer getOrder() {

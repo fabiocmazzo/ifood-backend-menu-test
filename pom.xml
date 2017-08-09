@@ -52,11 +52,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>2.9.4</version>
-        </dependency>
-        <dependency>
             <groupId>de.ruedigermoeller</groupId>
             <artifactId>fst</artifactId>
             <version>2.45</version>

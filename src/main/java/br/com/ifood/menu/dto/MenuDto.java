@@ -15,6 +15,8 @@ public class MenuDto implements Serializable {
 
     private static final long serialVersionUID = -1408095429551652614L;
 
+    private Long id;
+
     private String code;
 
     private List<ItemGroupDto> itemGroupDtoList;
@@ -43,6 +45,14 @@ public class MenuDto implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

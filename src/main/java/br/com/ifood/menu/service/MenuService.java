@@ -3,16 +3,9 @@ package br.com.ifood.menu.service;
 import br.com.ifood.menu.dto.MenuDto;
 import br.com.ifood.menu.dto.adapter.MenuAdapter;
 import br.com.ifood.menu.model.entity.Menu;
-import br.com.ifood.menu.model.entity.Restaurant;
 import br.com.ifood.menu.repository.MenuRepository;
-import br.com.ifood.menu.repository.RestaurantRepository;
-import org.redisson.api.RBucket;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * MenuService Bean, use to find Menu and transforms to
@@ -22,19 +15,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MenuService {
 
-
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-
     @Autowired
     private MenuRepository menuRepository;
 
-
     @Autowired
-    private RedissonClient redissonClient;
-
-    @Value("${redis.seconds.ttl}")
-    private Long redisSecondsTTL;
+    private RedisCacheDtoService redisCacheDtoService;
 
 
     /**
@@ -51,17 +36,16 @@ public class MenuService {
      * Return MenuDto in Redis cache or find in Neo4j Repository
      * and transforms in menuDto and cache it.
      * @param restaurantCode Restaurant code.
-     * @return MenuDto
+     * @return MenuDto MenuDto Object.
      */
     public MenuDto getMenuDTO(String restaurantCode) {
         // Verify if apapted object is persisted in REDIS
-        RBucket<MenuDto> bucket = redissonClient.getBucket(restaurantCode);
-        MenuDto menuDto = bucket.get();
+        MenuDto menuDto = redisCacheDtoService.get(restaurantCode);
         if (menuDto != null) {
             return menuDto;
         }
         menuDto = MenuAdapter.adapt(getMenu(restaurantCode));
-        bucket.set(menuDto, redisSecondsTTL, TimeUnit.SECONDS);
+        redisCacheDtoService.put(restaurantCode, menuDto);
         return menuDto;
     }
 }

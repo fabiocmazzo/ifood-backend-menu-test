@@ -28,6 +28,7 @@ public class MenuAdapter {
         ItemDto itemDto = new ItemDto();
         itemDto.setId(item.getId());
         itemDto.setCode(item.getCode());
+        itemDto.setLabel(item.getLabel());
         itemDto.setAvailable(available);
         // When is a Option item there is no price, because price is defined in Option RelationShip with father
         itemDto.setStartPrice(BigDecimal.ZERO);
@@ -176,6 +177,7 @@ public class MenuAdapter {
         itemComboDto.setLabel(haveItemCombo.getItemCombo().getLabel());
         itemComboDto.setStartPrice(haveItemCombo.getStartPrice());
         itemComboDto.setAvailable(haveItemCombo.getAvailable());
+        itemComboDto.setOrder(haveItemCombo.getOrder());
 
         if (haveItemCombo.getItemCombo().getHaveComboItemSet() != null) {
             List<ItemDto> itemDtoList = haveItemCombo.getItemCombo().getHaveComboItemSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());

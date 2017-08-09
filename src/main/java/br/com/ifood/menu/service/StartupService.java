@@ -279,6 +279,7 @@ public class StartupService {
         itemOrangeJuice.setCode("ITEM_ORANGE_JUICE");
         itemOrangeJuice.setLabel("Orange");
 
+
         Option optionOrangeJuice = new Option();
         optionOrangeJuice.setCode("OPTION_ORANGE");
         optionOrangeJuice.setItem(itemOrangeJuice);

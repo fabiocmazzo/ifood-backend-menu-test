@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Spring Data Redis, to cache MenuDto and minimize access to Neo$J.
@@ -15,7 +16,6 @@ import javax.annotation.PostConstruct;
  */
 @Service
 public class RedisCacheDtoService {
-
 
     /**
      * Key for differ entries in Redis Server.
@@ -25,14 +25,15 @@ public class RedisCacheDtoService {
     @Autowired
     private RedisTemplate<String, Object> templateRedis;
 
-    private HashOperations hashOps;
+    @Value("${redis.seconds.ttl}")
+    private Long redisTtl;
 
+    private HashOperations hashOps;
 
     @PostConstruct
     private void init() {
         hashOps = templateRedis.opsForHash();
     }
-
 
     @Value("${redis.seconds.ttl}")
     private Long redisSecondsTTL;
@@ -45,6 +46,7 @@ public class RedisCacheDtoService {
      */
     public void put(String restaurantCode, MenuDto menuDto) {
         hashOps.put(KEY, restaurantCode, menuDto);
+        templateRedis.expire( KEY, redisTtl, TimeUnit.SECONDS );
     }
 
     /**

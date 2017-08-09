@@ -15,11 +15,13 @@ public class ItemDto implements Serializable {
 
     private static final long serialVersionUID = 1705434706214723586L;
 
+    private Long id;
+
     private String code;
 
     private String label;
 
-    private BigDecimal price;
+    private BigDecimal startPrice;
 
     private Integer order;
 
@@ -28,6 +30,14 @@ public class ItemDto implements Serializable {
     private List<OptionGroupDto> optionGroupDtoList;
 
     private Boolean available;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCode() {
         return code;
@@ -45,12 +55,12 @@ public class ItemDto implements Serializable {
         this.label = label;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getStartPrice() {
+        return startPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setStartPrice(BigDecimal startPrice) {
+        this.startPrice = startPrice;
     }
 
     public Integer getOrder() {
@@ -61,14 +71,6 @@ public class ItemDto implements Serializable {
         this.order = order;
     }
 
-    public List<OptionGroupDto> getOptionGroupDtoList() {
-        return optionGroupDtoList;
-    }
-
-    public void setOptionGroupDtoList(List<OptionGroupDto> optionGroupDtoList) {
-        this.optionGroupDtoList = optionGroupDtoList;
-    }
-
     public Integer getQty() {
         return qty;
     }
@@ -77,43 +79,19 @@ public class ItemDto implements Serializable {
         this.qty = qty;
     }
 
+    public List<OptionGroupDto> getOptionGroupDtoList() {
+        return optionGroupDtoList;
+    }
+
+    public void setOptionGroupDtoList(List<OptionGroupDto> optionGroupDtoList) {
+        this.optionGroupDtoList = optionGroupDtoList;
+    }
+
     public Boolean getAvailable() {
         return available;
     }
 
     public void setAvailable(Boolean available) {
         this.available = available;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ItemDto itemDto = (ItemDto) o;
-
-        return new EqualsBuilder()
-                .append(code, itemDto.code)
-                .append(label, itemDto.label)
-                .append(price, itemDto.price)
-                .append(order, itemDto.order)
-                .append(qty, itemDto.qty)
-                .append(optionGroupDtoList, itemDto.optionGroupDtoList)
-                .append(available, itemDto.available)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(code)
-                .append(label)
-                .append(price)
-                .append(order)
-                .append(qty)
-                .append(optionGroupDtoList)
-                .append(available)
-                .toHashCode();
     }
 }

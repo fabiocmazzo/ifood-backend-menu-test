@@ -54,29 +54,4 @@ public class ItemGroupDto implements Serializable {
         this.available = available;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ItemGroupDto that = (ItemGroupDto) o;
-
-        return new EqualsBuilder()
-                .append(label, that.label)
-                .append(itemDtoList, that.itemDtoList)
-                .append(itemComboDtoList, that.itemComboDtoList)
-                .append(available, that.available)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(label)
-                .append(itemDtoList)
-                .append(itemComboDtoList)
-                .append(available)
-                .toHashCode();
-    }
 }

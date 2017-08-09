@@ -1,15 +1,12 @@
 package br.com.ifood.menu.dto;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Class ItemComboDto to expose ItemCombo to World.
+ *
  * @author Fabio Covolo Mazzo
  */
 public class ItemComboDto implements Serializable {
@@ -22,11 +19,12 @@ public class ItemComboDto implements Serializable {
 
     private List<ItemDto> itemDtoList;
 
-    private Map<ItemDto, OptionDto> itemDtoOptionDtoMap;
+    private List<OptionGroupDto> optionGroupDtoList;
 
-    private BigDecimal price;
+    private BigDecimal startPrice;
 
     private Boolean available;
+
 
     public String getLabel() {
         return label;
@@ -52,20 +50,20 @@ public class ItemComboDto implements Serializable {
         this.itemDtoList = itemDtoList;
     }
 
-     public Map<ItemDto, OptionDto> getItemDtoOptionDtoMap() {
-        return itemDtoOptionDtoMap;
+    public List<OptionGroupDto> getOptionGroupDtoList() {
+        return optionGroupDtoList;
     }
 
-    public void setItemDtoOptionDtoMap(Map<ItemDto, OptionDto> itemDtoOptionDtoMap) {
-        this.itemDtoOptionDtoMap = itemDtoOptionDtoMap;
+    public void setOptionGroupDtoList(List<OptionGroupDto> optionGroupDtoList) {
+        this.optionGroupDtoList = optionGroupDtoList;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getStartPrice() {
+        return startPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setStartPrice(BigDecimal startPrice) {
+        this.startPrice = startPrice;
     }
 
     public Boolean getAvailable() {
@@ -74,35 +72,5 @@ public class ItemComboDto implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ItemComboDto that = (ItemComboDto) o;
-
-        return new EqualsBuilder()
-                .append(label, that.label)
-                .append(code, that.code)
-                .append(itemDtoList, that.itemDtoList)
-           //     .append(itemDtoOptionDtoMap, that.itemDtoOptionDtoMap)
-                .append(price, that.price)
-                .append(available, that.available)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(label)
-                .append(code)
-                .append(itemDtoList)
-           //     .append(itemDtoOptionDtoMap)
-                .append(price)
-                .append(available)
-                .toHashCode();
     }
 }

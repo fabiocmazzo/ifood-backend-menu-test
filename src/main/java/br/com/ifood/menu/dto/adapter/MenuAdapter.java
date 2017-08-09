@@ -1,7 +1,9 @@
 package br.com.ifood.menu.dto.adapter;
 
 import br.com.ifood.menu.dto.*;
+import br.com.ifood.menu.model.entity.Item;
 import br.com.ifood.menu.model.entity.Menu;
+import br.com.ifood.menu.model.entity.OptionGroup;
 import br.com.ifood.menu.model.relationship.*;
 
 import java.math.BigDecimal;
@@ -17,6 +19,41 @@ public class MenuAdapter {
 
 
     /**
+     * Adapt item to ItemDto, used only in item from Option.
+     * @param item Item
+     * @return ItemDto
+     */
+    private static ItemDto adapt(Item item) {
+        ItemDto itemDto = new ItemDto();
+        itemDto.setId(item.getId());
+        itemDto.setCode(item.getCode());
+        // When is a Option item there is no price, because price is defined in Option RelationShip with father
+        itemDto.setStartPrice(BigDecimal.ZERO);
+        itemDto.setQty(1);
+      if (item.getHaveOptionGroupSet() != null) {
+            List<OptionGroupDto> optionDtoList = item.getHaveOptionGroupSet().stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
+            itemDto.setOptionGroupDtoList(optionDtoList);
+        }
+        return itemDto;
+    }
+
+    /**
+     * Adapt OptionGroup to OptionGroupDto
+     * @param optionGroup OptionGroup
+     * @return OptionGroupDto
+     */
+    private static OptionGroupDto adapt(OptionGroup optionGroup) {
+        OptionGroupDto optionGroupDto = new OptionGroupDto();
+        optionGroupDto.setLabel(optionGroup.getLabel());
+        if (optionGroup.getHaveOptionList() != null) {
+            List<OptionDto> optionDtoList = optionGroup.getHaveOptionList().stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
+            optionGroupDto.setOptionDtoList(optionDtoList);
+        }
+        return optionGroupDto;
+    }
+
+
+    /**
      * Adapt HaveOption RelationShip to OptionDto.
      *
      * @param haveOption HaveOptionRelationShip.
@@ -27,7 +64,9 @@ public class MenuAdapter {
         optionDto.setLabel(haveOption.getOption().getLabel());
         optionDto.setOrder(haveOption.getOrder());
         optionDto.setPrice(haveOption.getPrice());
-        //optionDto.setType(haveOption.getOption().getType());
+        optionDto.setItemDto(adapt(haveOption.getOption().getItem()));
+        optionDto.setOptionGroupDto(adapt(haveOption.getOption().getOptionGroup()));
+
         return optionDto;
     }
 
@@ -59,7 +98,7 @@ public class MenuAdapter {
         itemDto.setCode(haveComboItem.getItem().getCode());
         itemDto.setLabel(haveComboItem.getItem().getLabel());
         // É zero pois o preço já está no Combo
-        itemDto.setPrice(BigDecimal.ZERO);
+        itemDto.setStartPrice(BigDecimal.ZERO);
         itemDto.setOrder(haveComboItem.getOrder());
         itemDto.setQty(haveComboItem.getQty());
         if (haveComboItem.getItem().getHaveOptionGroupSet() != null) {
@@ -79,7 +118,7 @@ public class MenuAdapter {
         ItemComboDto itemComboDto = new ItemComboDto();
         itemComboDto.setCode(haveItemCombo.getItemCombo().getCode());
         itemComboDto.setLabel(haveItemCombo.getItemCombo().getLabel());
-       // itemComboDto.setPrice(haveItemCombo.getStartPrice());
+        itemComboDto.setStartPrice(haveItemCombo.getStartPrice());
         if (haveItemCombo.getItemCombo().getHaveComboItemSet() != null) {
             List<ItemDto> itemDtoList = haveItemCombo.getItemCombo().getHaveComboItemSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
             itemComboDto.setItemDtoList(itemDtoList);
@@ -98,7 +137,7 @@ public class MenuAdapter {
         itemDto.setCode(haveItem.getItem().getCode());
         itemDto.setLabel(haveItem.getItem().getLabel());
         itemDto.setOrder(haveItem.getOrder());
-        itemDto.setPrice(haveItem.getStartPrice());
+        itemDto.setStartPrice(haveItem.getStartPrice());
         itemDto.setQty(1);
         if (haveItem.getItem().getHaveOptionGroupSet() != null) {
             List<OptionGroupDto> optionDtoList = haveItem.getItem().getHaveOptionGroupSet().stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());

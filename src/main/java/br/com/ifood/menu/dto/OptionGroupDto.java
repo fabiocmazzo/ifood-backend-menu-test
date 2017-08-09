@@ -14,13 +14,28 @@ public class OptionGroupDto implements Serializable {
 
     private static final long serialVersionUID = -9133657394643773512L;
 
+    private Long id;
+
     private String label;
 
     private Integer order;
 
+    /**
+     * OptiongGroup Type can be SIZE, TOPING, ITEM, OPTION_GROUP etc
+     */
+    private String type;
+
     private List<OptionDto> optionDtoList;
 
     private Boolean available;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLabel() {
         return label;
@@ -36,6 +51,14 @@ public class OptionGroupDto implements Serializable {
 
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<OptionDto> getOptionDtoList() {
@@ -54,29 +77,4 @@ public class OptionGroupDto implements Serializable {
         this.available = available;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OptionGroupDto that = (OptionGroupDto) o;
-
-        return new EqualsBuilder()
-                .append(label, that.label)
-                .append(order, that.order)
-                .append(optionDtoList, that.optionDtoList)
-                .append(available, that.available)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(label)
-                .append(order)
-                .append(optionDtoList)
-                .append(available)
-                .toHashCode();
-    }
 }

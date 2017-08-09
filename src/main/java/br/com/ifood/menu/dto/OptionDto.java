@@ -14,12 +14,9 @@ public class OptionDto implements Serializable {
 
     private static final long serialVersionUID = 5320775881531236500L;
 
-    private String label;
+    private Long id;
 
-    /**
-     * Option Type can be SIZE, TOPING, etc
-     */
-    private String type;
+    private String label;
 
     private Boolean canRepeat;
 
@@ -27,7 +24,21 @@ public class OptionDto implements Serializable {
 
     private BigDecimal price;
 
+    private BigDecimal additionalPrice;
+
     private Boolean available;
+
+    private ItemDto itemDto;
+
+    private OptionGroupDto optionGroupDto;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLabel() {
         return label;
@@ -35,14 +46,6 @@ public class OptionDto implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Boolean getCanRepeat() {
@@ -69,41 +72,35 @@ public class OptionDto implements Serializable {
         this.price = price;
     }
 
+    public BigDecimal getAdditionalPrice() {
+        return additionalPrice;
+    }
+
+    public void setAdditionalPrice(BigDecimal additionalPrice) {
+        this.additionalPrice = additionalPrice;
+    }
+
     public Boolean getAvailable() {
         return available;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OptionDto optionDto = (OptionDto) o;
-
-        return new EqualsBuilder()
-                .append(label, optionDto.label)
-                .append(type, optionDto.type)
-                .append(canRepeat, optionDto.canRepeat)
-                .append(order, optionDto.order)
-                .append(price, optionDto.price)
-                .append(available, optionDto.available)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(label)
-                .append(type)
-                .append(canRepeat)
-                .append(order)
-                .append(price)
-                .append(available)
-                .toHashCode();
-    }
-
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public ItemDto getItemDto() {
+        return itemDto;
+    }
+
+    public void setItemDto(ItemDto itemDto) {
+        this.itemDto = itemDto;
+    }
+
+    public OptionGroupDto getOptionGroupDto() {
+        return optionGroupDto;
+    }
+
+    public void setOptionGroupDto(OptionGroupDto optionGroupDto) {
+        this.optionGroupDto = optionGroupDto;
     }
 }

@@ -23,6 +23,14 @@ public class MenuDto implements Serializable {
 
     private Boolean available;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCode() {
         return code;
     }
@@ -45,37 +53,5 @@ public class MenuDto implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MenuDto menuDto = (MenuDto) o;
-
-        return new EqualsBuilder()
-                .append(code, menuDto.code)
-                .append(itemGroupDtoList, menuDto.itemGroupDtoList)
-                .append(available, menuDto.available)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(code)
-                .append(itemGroupDtoList)
-                .append(available)
-                .toHashCode();
     }
 }

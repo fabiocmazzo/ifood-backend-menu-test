@@ -30,6 +30,9 @@ public class ItemCombo {
     @Relationship
     private Set<HaveComboOptionGroup> haveComboOptionGroupSet;
 
+    /**
+     * Realmente é necessário??? Verificar removação
+     */
     @Relationship
     private Set<HaveComboOption> haveComboOptionSet;
 
@@ -79,21 +82,6 @@ public class ItemCombo {
             this.haveComboOptionGroupSet = new HashSet<>();
         }
         haveComboOptionGroupSet.add(haveComboOptionGroup);
-    }
-
-    public Set<HaveComboOption> getHaveComboOptionSet() {
-        return haveComboOptionSet;
-    }
-
-    public void setHaveComboOptionSet(Set<HaveComboOption> haveComboOptionSet) {
-        this.haveComboOptionSet = haveComboOptionSet;
-    }
-
-    public void addHaveComboOption(HaveComboOption haveComboOption) {
-        if (this.haveComboOptionSet == null) {
-            this.haveComboOptionSet = new HashSet<>();
-        }
-        haveComboOptionSet.add(haveComboOption);
     }
 
     public void addHaveComboItem(HaveComboItem haveComboItem) {

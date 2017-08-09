@@ -13,6 +13,8 @@ public class ItemComboDto implements Serializable {
 
     private static final long serialVersionUID = -2273929810948551865L;
 
+    private Long id;
+
     private String label;
 
     private String code;
@@ -25,6 +27,15 @@ public class ItemComboDto implements Serializable {
 
     private Boolean available;
 
+    private Integer order;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLabel() {
         return label;
@@ -72,5 +83,13 @@ public class ItemComboDto implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 }

@@ -20,17 +20,19 @@ public class MenuAdapter {
 
     /**
      * Adapt item to ItemDto, used only in item from Option.
+     *
      * @param item Item
      * @return ItemDto
      */
-    private static ItemDto adapt(Item item) {
+    private static ItemDto adapt(Item item, Boolean available) {
         ItemDto itemDto = new ItemDto();
         itemDto.setId(item.getId());
         itemDto.setCode(item.getCode());
+        itemDto.setAvailable(available);
         // When is a Option item there is no price, because price is defined in Option RelationShip with father
         itemDto.setStartPrice(BigDecimal.ZERO);
         itemDto.setQty(1);
-      if (item.getHaveOptionGroupSet() != null) {
+        if (item.getHaveOptionGroupSet() != null) {
             List<OptionGroupDto> optionDtoList = item.getHaveOptionGroupSet().stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
             itemDto.setOptionGroupDtoList(optionDtoList);
         }
@@ -39,11 +41,21 @@ public class MenuAdapter {
 
     /**
      * Adapt OptionGroup to OptionGroupDto
+     *
      * @param optionGroup OptionGroup
      * @return OptionGroupDto
      */
-    private static OptionGroupDto adapt(OptionGroup optionGroup) {
+    private static OptionGroupDto adapt(OptionGroup optionGroup, Boolean available, Integer minOptions, Integer maxOptions, Boolean canRepeat) {
         OptionGroupDto optionGroupDto = new OptionGroupDto();
+        optionGroupDto.setLabel(optionGroup.getLabel());
+        optionGroupDto.setId(optionGroup.getId());
+        optionGroupDto.setAvailable(available);
+        // is 1, beacause relation with option is 1:1
+        optionGroupDto.setOrder(1);
+        // This is defined by
+        optionGroupDto.setMinOptions(minOptions);
+        optionGroupDto.setMaxOptions(maxOptions);
+        optionGroupDto.setCanRepeat(canRepeat);
         optionGroupDto.setLabel(optionGroup.getLabel());
         if (optionGroup.getHaveOptionList() != null) {
             List<OptionDto> optionDtoList = optionGroup.getHaveOptionList().stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
@@ -61,14 +73,45 @@ public class MenuAdapter {
      */
     private static OptionDto adapt(HaveOption haveOption) {
         OptionDto optionDto = new OptionDto();
+        optionDto.setId(haveOption.getId());
         optionDto.setLabel(haveOption.getOption().getLabel());
         optionDto.setOrder(haveOption.getOrder());
         optionDto.setPrice(haveOption.getPrice());
-        optionDto.setItemDto(adapt(haveOption.getOption().getItem()));
-        optionDto.setOptionGroupDto(adapt(haveOption.getOption().getOptionGroup()));
-
+        Item item = haveOption.getOption().getItem();
+        if (item != null) {
+            optionDto.setItemDto(adapt(item, optionDto.getAvailable()));
+        }
+        OptionGroup optionGroup = haveOption.getOption().getOptionGroup();
+        if (optionGroup != null) {
+            optionDto.setOptionGroupDto(adapt(optionGroup,haveOption.getAvailable(), haveOption.getOption().getMinOptionForOptionGroup(),haveOption.getOption().getMaxOptionsForOptionGroup(), haveOption.getOption().getCanRepeatForOptionGroup() ));
+        }
+        optionDto.setAvailable(haveOption.getAvailable());
         return optionDto;
     }
+
+
+    /**
+     * Adapt HaveComboOptionGroup to OptionGroupDto.
+     *
+     * @param haveComboOptionGroup haveComboOptionGroup Relationship with Option list.
+     * @return OptionGroupDto
+     */
+    private static OptionGroupDto adapt(HaveComboOptionGroup haveComboOptionGroup) {
+        OptionGroupDto optionGroupDto = new OptionGroupDto();
+        optionGroupDto.setId(haveComboOptionGroup.getOptionGroup().getId());
+        optionGroupDto.setAvailable(haveComboOptionGroup.getAvailable());
+        optionGroupDto.setOrder(haveComboOptionGroup.getOrder());
+        optionGroupDto.setMinOptions(haveComboOptionGroup.getMinOptions());
+        optionGroupDto.setMaxOptions(haveComboOptionGroup.getMaxOptions());
+        optionGroupDto.setCanRepeat(haveComboOptionGroup.getCanRepeat());
+        optionGroupDto.setLabel(haveComboOptionGroup.getOptionGroup().getLabel());
+        if (haveComboOptionGroup.getOptionGroup().getHaveOptionList() != null) {
+            List<OptionDto> optionDtoList = haveComboOptionGroup.getOptionGroup().getHaveOptionList().stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
+            optionGroupDto.setOptionDtoList(optionDtoList);
+        }
+        return optionGroupDto;
+    }
+
 
 
     /**
@@ -79,6 +122,12 @@ public class MenuAdapter {
      */
     private static OptionGroupDto adapt(HaveOptionGroup haveOptionGroup) {
         OptionGroupDto optionGroupDto = new OptionGroupDto();
+        optionGroupDto.setId(haveOptionGroup.getOptionGroup().getId());
+        optionGroupDto.setAvailable(haveOptionGroup.getAvailable());
+        optionGroupDto.setOrder(haveOptionGroup.getOrder());
+        optionGroupDto.setMinOptions(haveOptionGroup.getMinOptions());
+        optionGroupDto.setMaxOptions(haveOptionGroup.getMaxOptions());
+        optionGroupDto.setCanRepeat(haveOptionGroup.getCanRepeat());
         optionGroupDto.setLabel(haveOptionGroup.getOptionGroup().getLabel());
         if (haveOptionGroup.getOptionGroup().getHaveOptionList() != null) {
             List<OptionDto> optionDtoList = haveOptionGroup.getOptionGroup().getHaveOptionList().stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
@@ -116,12 +165,19 @@ public class MenuAdapter {
      */
     private static ItemComboDto adapt(HaveItemCombo haveItemCombo) {
         ItemComboDto itemComboDto = new ItemComboDto();
+        itemComboDto.setId(haveItemCombo.getItemCombo().getId());
         itemComboDto.setCode(haveItemCombo.getItemCombo().getCode());
         itemComboDto.setLabel(haveItemCombo.getItemCombo().getLabel());
         itemComboDto.setStartPrice(haveItemCombo.getStartPrice());
+        itemComboDto.setAvailable(haveItemCombo.getAvailable());
         if (haveItemCombo.getItemCombo().getHaveComboItemSet() != null) {
             List<ItemDto> itemDtoList = haveItemCombo.getItemCombo().getHaveComboItemSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
             itemComboDto.setItemDtoList(itemDtoList);
+        }
+
+        if (haveItemCombo.getItemCombo().getHaveComboOptionGroupSet() != null) {
+            List<OptionGroupDto> optionGroupDtoList = haveItemCombo.getItemCombo().getHaveComboOptionGroupSet().stream().map(haveComboOptionGroup -> adapt(haveComboOptionGroup)).collect(Collectors.toList());
+            itemComboDto.setOptionGroupDtoList(optionGroupDtoList);
         }
         return itemComboDto;
     }
@@ -178,6 +234,7 @@ public class MenuAdapter {
      */
     public static MenuDto adapt(Menu menu) {
         MenuDto menuDto = new MenuDto();
+        menuDto.setId(menu.getId());
         menuDto.setCode(menu.getCode());
         if (menu.getHaveItemGroupList() != null) {
             List<ItemGroupDto> itemGroupDtoList = menu.getHaveItemGroupList().stream().map(haveItemGroup -> adapt(haveItemGroup)).collect(Collectors.toList());

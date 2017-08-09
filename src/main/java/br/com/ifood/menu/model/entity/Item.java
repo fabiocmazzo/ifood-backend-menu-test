@@ -29,7 +29,6 @@ public class Item {
     @Relationship(type = "HAVE_OPTION_GROUP")
     private Set<HaveOptionGroup> haveOptionGroupSet;
 
-
     @Relationship(type = "IMPLEMENTS_TEMPLATE")
     private Template template;
 

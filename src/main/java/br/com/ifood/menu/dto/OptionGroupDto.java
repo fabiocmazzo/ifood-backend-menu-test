@@ -25,6 +25,12 @@ public class OptionGroupDto implements Serializable {
      */
     private String type;
 
+    private Boolean canRepeat;
+
+    private Integer minOptions;
+
+    private Integer maxOptions;
+
     private List<OptionDto> optionDtoList;
 
     private Boolean available;
@@ -55,6 +61,30 @@ public class OptionGroupDto implements Serializable {
 
     public String getType() {
         return type;
+    }
+
+    public Boolean getCanRepeat() {
+        return canRepeat;
+    }
+
+    public void setCanRepeat(Boolean canRepeat) {
+        this.canRepeat = canRepeat;
+    }
+
+    public Integer getMinOptions() {
+        return minOptions;
+    }
+
+    public void setMinOptions(Integer minOptions) {
+        this.minOptions = minOptions;
+    }
+
+    public Integer getMaxOptions() {
+        return maxOptions;
+    }
+
+    public void setMaxOptions(Integer maxOptions) {
+        this.maxOptions = maxOptions;
     }
 
     public void setType(String type) {

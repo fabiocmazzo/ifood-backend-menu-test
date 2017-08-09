@@ -23,8 +23,20 @@ public class Option {
     @Relationship(type="HAVE_OPTION_TYPE_ITEM")
     private Item item;
 
+    /**
+     * Properties used for OptionGroup, is here to avoid complexity
+     * to create a unecessary relationship.
+     */
+    private Integer maxOptionsForOptionGroup;
+
+    private Integer minOptionForOptionGroup;
+
+    private Boolean canRepeatForOptionGroup;
+
     @Relationship(type="HAVE_OPTION_TYPE_OPTION_GROUP")
     private OptionGroup optionGroup;
+
+
 
     public Long getId() {
         return id;
@@ -64,5 +76,29 @@ public class Option {
 
     public void setOptionGroup(OptionGroup optionGroup) {
         this.optionGroup = optionGroup;
+    }
+
+    public Integer getMaxOptionsForOptionGroup() {
+        return maxOptionsForOptionGroup;
+    }
+
+    public void setMaxOptionsForOptionGroup(Integer maxOptionsForOptionGroup) {
+        this.maxOptionsForOptionGroup = maxOptionsForOptionGroup;
+    }
+
+    public Integer getMinOptionForOptionGroup() {
+        return minOptionForOptionGroup;
+    }
+
+    public void setMinOptionForOptionGroup(Integer minOptionForOptionGroup) {
+        this.minOptionForOptionGroup = minOptionForOptionGroup;
+    }
+
+    public Boolean getCanRepeatForOptionGroup() {
+        return canRepeatForOptionGroup;
+    }
+
+    public void setCanRepeatForOptionGroup(Boolean canRepeatForOptionGroup) {
+        this.canRepeatForOptionGroup = canRepeatForOptionGroup;
     }
 }

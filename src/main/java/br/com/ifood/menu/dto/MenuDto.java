@@ -21,8 +21,6 @@ public class MenuDto implements Serializable {
 
     private List<ItemGroupDto> itemGroupDtoList;
 
-    private Boolean available;
-
     public Long getId() {
         return id;
     }
@@ -47,11 +45,4 @@ public class MenuDto implements Serializable {
         this.itemGroupDtoList = itemGroupDtoList;
     }
 
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
 }

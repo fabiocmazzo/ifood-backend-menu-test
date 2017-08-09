@@ -4,6 +4,8 @@ import br.com.ifood.menu.model.entity.Item;
 import br.com.ifood.menu.model.entity.ItemCombo;
 import org.neo4j.ogm.annotation.*;
 
+import java.math.BigDecimal;
+
 /**
  * HaveComboItem (ItemCombo -> Item) Relationship.
  * @author Fabio Covolo Mazzo
@@ -19,6 +21,15 @@ public class HaveComboItem {
 
     @Property
     private Integer order;
+
+    @Property
+    private BigDecimal additionalPrice;
+
+    /**
+     * To define itens and prices of a ItemGroupCombo.
+     */
+    @Property
+    private String itemGroupCode;
 
     @Property
     private String chainCode;
@@ -53,6 +64,22 @@ public class HaveComboItem {
 
     public Integer getOrder() {
         return order;
+    }
+
+    public BigDecimal getAdditionalPrice() {
+        return additionalPrice;
+    }
+
+    public void setAdditionalPrice(BigDecimal additionalPrice) {
+        this.additionalPrice = additionalPrice;
+    }
+
+    public String getItemGroupCode() {
+        return itemGroupCode;
+    }
+
+    public void setItemGroupCode(String itemGroupCode) {
+        this.itemGroupCode = itemGroupCode;
     }
 
     public void setOrder(Integer order) {

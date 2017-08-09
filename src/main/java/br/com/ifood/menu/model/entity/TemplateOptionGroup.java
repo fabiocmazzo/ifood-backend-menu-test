@@ -1,6 +1,6 @@
 package br.com.ifood.menu.model.entity;
 
-import br.com.ifood.menu.model.relationship.HaveTemplateOptionGroup;
+import br.com.ifood.menu.model.relationship.HaveTemplateOption;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -9,11 +9,11 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.Set;
 
 /**
- * Template Entity
+ * TemplateOptionGroup Entity
  * @author Fabio Covolo Mazzo
  */
 @NodeEntity
-public class Template {
+public class TemplateOptionGroup {
 
     @GraphId
     private Long id;
@@ -24,7 +24,7 @@ public class Template {
     private String description;
 
     @Relationship
-    private Set<HaveTemplateOptionGroup> haveTemplateOptionGroupSet;
+    private Set<HaveTemplateOption> haveTemplateOptionSet;
 
     public Long getId() {
         return id;
@@ -50,11 +50,11 @@ public class Template {
         this.description = description;
     }
 
-    public Set<HaveTemplateOptionGroup> getHaveTemplateOptionGroupSet() {
-        return haveTemplateOptionGroupSet;
+    public Set<HaveTemplateOption> getHaveTemplateOptionSet() {
+        return haveTemplateOptionSet;
     }
 
-    public void setHaveTemplateOptionGroupSet(Set<HaveTemplateOptionGroup> haveTemplateOptionGroupSet) {
-        this.haveTemplateOptionGroupSet = haveTemplateOptionGroupSet;
+    public void setHaveTemplateOptionSet(Set<HaveTemplateOption> haveTemplateOptionSet) {
+        this.haveTemplateOptionSet = haveTemplateOptionSet;
     }
 }

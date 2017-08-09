@@ -1,35 +1,31 @@
 package br.com.ifood.menu.model.relationship;
 
-import br.com.ifood.menu.model.entity.Item;
 import br.com.ifood.menu.model.entity.ItemCombo;
 import br.com.ifood.menu.model.entity.Option;
 import org.neo4j.ogm.annotation.*;
 
 /**
- * HaveComboItemOption RelationShip. (ItemCombo -> Option).
+ * HaveComboOption RelationShip. (ItemCombo -> Option).
  *
  * @author Fabio Covolo Mazzo
  */
 @RelationshipEntity(type = "HAVE_COMBO_ITEM_OPTION")
-public class HaveComboItemOption {
+public class HaveComboOption {
 
     @GraphId
     private Long id;
 
     @Property
-    private Integer qty;
-
-    @Property
-    private Integer order;
-
-    @Property
-    private String itemCode;
+    private Boolean canRepeat;
 
     @Property
     private String chainCode;
 
     @Property
     private String restaurantCode;
+
+    @Property
+    private String optionGroupCode;
 
     @Property
     private Boolean available;
@@ -48,28 +44,12 @@ public class HaveComboItemOption {
         this.id = id;
     }
 
-    public Integer getQty() {
-        return qty;
+    public Boolean getCanRepeat() {
+        return canRepeat;
     }
 
-    public void setQty(Integer qty) {
-        this.qty = qty;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public String getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
+    public void setCanRepeat(Boolean canRepeat) {
+        this.canRepeat = canRepeat;
     }
 
     public String getChainCode() {
@@ -88,6 +68,22 @@ public class HaveComboItemOption {
         this.restaurantCode = restaurantCode;
     }
 
+    public String getOptionGroupCode() {
+        return optionGroupCode;
+    }
+
+    public void setOptionGroupCode(String optionGroupCode) {
+        this.optionGroupCode = optionGroupCode;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
     public ItemCombo getItemCombo() {
         return itemCombo;
     }
@@ -102,13 +98,5 @@ public class HaveComboItemOption {
 
     public void setOption(Option option) {
         this.option = option;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 }

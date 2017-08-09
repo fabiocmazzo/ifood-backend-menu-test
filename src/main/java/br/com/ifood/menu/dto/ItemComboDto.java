@@ -50,7 +50,7 @@ public class ItemComboDto implements Serializable {
         this.itemDtoList = itemDtoList;
     }
 
-    public Map<ItemDto, OptionDto> getItemDtoOptionDtoMap() {
+     public Map<ItemDto, OptionDto> getItemDtoOptionDtoMap() {
         return itemDtoOptionDtoMap;
     }
 
@@ -86,7 +86,7 @@ public class ItemComboDto implements Serializable {
                 .append(label, that.label)
                 .append(code, that.code)
                 .append(itemDtoList, that.itemDtoList)
-                .append(itemDtoOptionDtoMap, that.itemDtoOptionDtoMap)
+           //     .append(itemDtoOptionDtoMap, that.itemDtoOptionDtoMap)
                 .append(price, that.price)
                 .append(available, that.available)
                 .isEquals();
@@ -98,7 +98,7 @@ public class ItemComboDto implements Serializable {
                 .append(label)
                 .append(code)
                 .append(itemDtoList)
-                .append(itemDtoOptionDtoMap)
+           //     .append(itemDtoOptionDtoMap)
                 .append(price)
                 .append(available)
                 .toHashCode();

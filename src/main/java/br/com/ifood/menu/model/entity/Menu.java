@@ -55,5 +55,15 @@ public class Menu {
         }
         haveItemGroupList.add(haveItemGroup);
     }
+
+    public void createHaveItemGroup(boolean available, ItemGroup itemGroup, String chainCode, String restaurantCode) {
+        HaveItemGroup haveItemGroup = new HaveItemGroup();
+        haveItemGroup.setAvailable(available);
+        haveItemGroup.setItemGroup(itemGroup);
+        haveItemGroup.setMenu(this);
+        haveItemGroup.setChainCode(chainCode);
+        haveItemGroup.setChainCode(restaurantCode);
+        this.addHaveItemGroup(haveItemGroup);
+    }
 }
 

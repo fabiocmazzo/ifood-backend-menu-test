@@ -42,795 +42,201 @@ public class StartupService {
     @Autowired
     private CommonItemPoolRepository commonItemPoolRepository;
 
-    private void createChainAndRestaurant() {
+    private void createFictionalRestaurantMenu() {
 
         /**
-         * Cria chain
+         * Chain
          */
         Chain chain = new Chain();
-        chain.setCode("REDEMCDONALDS");
-        chain.setName("Rede McDonalds");
+        chain.setCode("TEST_IFOOD_CHAIN");
+        chain.setName("Ifood Chain");
 
         /**
-         * Cria restaurante
+         * Restaurant
          */
         Restaurant restaurant = new Restaurant();
-        restaurant.setCode("MCDONALDSCAMBUI");
-        restaurant.setName("McDonalds Cambui");
+        restaurant.setCode("Hitchhiker_Restaurant");
+        restaurant.setName("The Restaurant at the End of the Universe");
         restaurant.setChain(chain);
 
-
         /**
-         * Cria Menu
+         *  Menu
          */
         Menu menuChain = new Menu();
-        menuChain.setCode("MCDONALDS_PADRAO_CHAIN");
+        menuChain.setCode("EndOfTheUniverseMenu");
         restaurant.setMenu(menuChain);
         chain.setMenu(menuChain);
 
-        ItemGroup itemGroupRestaurant = new ItemGroup();
-        itemGroupRestaurant.setCode("LANCHES-SELECIONADOS");
-        itemGroupRestaurant.setLabel("Lanches Selecionados");
-
-        ItemGroup itemGroupCombos = new ItemGroup();
-        itemGroupCombos.setCode("COMBOS");
-        itemGroupCombos.setLabel("Combos");
-
         /**
-         * Cria ItemGroup Bebidas
+         *  ItemGroups
          */
-        ItemGroup itemGroupLanches = new ItemGroup();
-        itemGroupLanches.setCode("LANCHES-MCDONALDS");
-        itemGroupLanches.setLabel("Lanches");
+        ItemGroup burgersGroup = new ItemGroup();
+        burgersGroup.setCode("BURGERS");
+        burgersGroup.setLabel("Burgers");
+        menuChain.createHaveItemGroup(true,burgersGroup,chain.getCode(), null);
 
-        /**
-         * Cria ItemGroup Bebidas
-         */
-        ItemGroup itemGroupBebidas = new ItemGroup();
-        itemGroupBebidas.setCode("BEBIDAS-MCDONALDS");
-        itemGroupBebidas.setLabel("Bebidas");
+        ItemGroup snacksGroup = new ItemGroup();
+        snacksGroup.setCode("SNACKS_AND_SIDES");
+        snacksGroup.setLabel("Snacks & Sides");
+        menuChain.createHaveItemGroup(true,snacksGroup,chain.getCode(), null);
+
+        ItemGroup drinksGroup = new ItemGroup();
+        drinksGroup.setCode("DRINKS");
+        drinksGroup.setLabel("Drinks");
+        menuChain.createHaveItemGroup(true,drinksGroup,chain.getCode(), null);
 
 
         /**
-         * Cria relacionamento itemGroup com menu do restaurante.
+         * Item Chips
          */
-        HaveItemGroup haveItemGroupLanchesSelecionados = new HaveItemGroup();
-        haveItemGroupLanchesSelecionados.setAvailable(true);
-        haveItemGroupLanchesSelecionados.setItemGroup(itemGroupRestaurant);
-        haveItemGroupLanchesSelecionados.setMenu(menuChain);
-        haveItemGroupLanchesSelecionados.setChainCode(chain.getCode());
-        menuChain.addHaveItemGroup(haveItemGroupLanchesSelecionados);
-
+        Item itemChips = new Item();
+        itemChips.setCode("CHIPS");
+        itemChips.setLabel("Chips");
+        snacksGroup.createHaveItem(itemChips,1,true,new BigDecimal("4"), chain.getCode(), null);
 
         /**
-         * Cria relacionamento itemGroup Bebidas com menu.
+         * Double Cheese Burger
          */
-        HaveItemGroup haveItemGroupBebidas = new HaveItemGroup();
-        haveItemGroupBebidas.setAvailable(true);
-        haveItemGroupBebidas.setItemGroup(itemGroupBebidas);
-        haveItemGroupBebidas.setMenu(menuChain);
-        haveItemGroupLanchesSelecionados.setChainCode(chain.getCode());
-        menuChain.addHaveItemGroup(haveItemGroupBebidas);
-
+        Item itemDoubleCheeseBurger = new Item();
+        itemDoubleCheeseBurger.setCode("DOUBLE_CHEESE_BURGER");
+        itemDoubleCheeseBurger.setLabel("Double Cheese Burger");
+        burgersGroup.createHaveItem(itemDoubleCheeseBurger,1,true,new BigDecimal("12"), chain.getCode(), null);
 
         /**
-         * Cria relacionamento itemGroup Lanches com menu.
+         * Cola
          */
-        HaveItemGroup haveItemGroupLanches = new HaveItemGroup();
-        haveItemGroupLanches.setAvailable(true);
-        haveItemGroupLanches.setItemGroup(itemGroupLanches);
-        haveItemGroupLanches.setMenu(menuChain);
-        haveItemGroupLanchesSelecionados.setChainCode(chain.getCode());
-        menuChain.addHaveItemGroup(haveItemGroupLanches);
+        Item itemCola = new Item();
+        itemCola.setCode("COLA");
+        itemCola.setLabel("Cola");
+        drinksGroup.createHaveItem(itemCola,1,true,new BigDecimal("3"), chain.getCode(), null);
 
+       /**
+         * Chips Topics OptionGroup
+         */
+        OptionGroup optionGroupChipsTopics = new OptionGroup();
+        optionGroupChipsTopics.setCode("CHIPS_TOPICS");
+        optionGroupChipsTopics.setLabel("Chips Topics");
+        optionGroupChipsTopics.setType(OptionGroupType.TOPIC);
+        itemChips.createHaveOptionGroup(optionGroupChipsTopics, true, 1, false, 0, 1, chain.getCode(), null);
 
         /**
-         * Cria item Cheese-Burger
+         * Bacon Option
          */
-        Item itemCheeseBurger = new Item();
-        itemCheeseBurger.setCode("BIG-MAC");
-        itemCheeseBurger.setLabel("BigMac");
-
-        Item itemHamburguer = new Item();
-        itemHamburguer.setCode("BIG-TASTY");
-        itemHamburguer.setLabel("BigTasty");
-
-        Item itemDoubleCheeseBacon = new Item();
-        itemDoubleCheeseBacon.setCode("QUARTEIRAO");
-        itemDoubleCheeseBacon.setLabel("Quarteirão");
-
-        Item itemCheeseOrion = new Item();
-        itemCheeseOrion.setCode("MCCHICKEN");
-        itemCheeseOrion.setLabel("McChicken");
-
-
-        HaveItem haveItemCheeseBurger = new HaveItem();
-        haveItemCheeseBurger.setItemGroup(itemGroupLanches);
-        haveItemCheeseBurger.setItem(itemCheeseBurger);
-        haveItemCheeseBurger.setOrder(1);
-        haveItemCheeseBurger.setAvailable(true);
-        haveItemCheeseBurger.setChainCode(chain.getCode());
-        haveItemCheeseBurger.setPrice(new BigDecimal("15.50"));
-
-        itemGroupLanches.addHaveItem(haveItemCheeseBurger);
-
-        HaveItem haveItemHamburguer = new HaveItem();
-        haveItemHamburguer.setItemGroup(itemGroupLanches);
-        haveItemHamburguer.setItem(itemHamburguer);
-        haveItemHamburguer.setOrder(1);
-        haveItemHamburguer.setAvailable(true);
-        haveItemHamburguer.setRestaurantCode(restaurant.getCode());
-        haveItemHamburguer.setPrice(new BigDecimal("18.50"));
-
-        itemGroupLanches.addHaveItem(haveItemHamburguer);
-
-
-        HaveItem haveItemDoubleCheeseBacon = new HaveItem();
-        haveItemDoubleCheeseBacon.setItemGroup(itemGroupLanches);
-        haveItemDoubleCheeseBacon.setItem(itemDoubleCheeseBacon);
-        haveItemDoubleCheeseBacon.setOrder(1);
-        haveItemDoubleCheeseBacon.setChainCode(chain.getCode());
-        haveItemDoubleCheeseBacon.setPrice(new BigDecimal("23.50"));
-
-        itemGroupLanches.addHaveItem(haveItemDoubleCheeseBacon);
-
-        HaveItem haveItemCheeseOrion = new HaveItem();
-        haveItemCheeseOrion.setItemGroup(itemGroupLanches);
-        haveItemCheeseOrion.setItem(itemCheeseOrion);
-        haveItemCheeseOrion.setOrder(1);
-        haveItemCheeseOrion.setChainCode(chain.getCode());
-        haveItemCheeseOrion.setPrice(new BigDecimal("33.50"));
-
-        HaveItem haveItemCheeseOrionRestaurant = new HaveItem();
-        haveItemCheeseOrionRestaurant.setItemGroup(itemGroupLanches);
-        haveItemCheeseOrionRestaurant.setItem(itemCheeseOrion);
-        haveItemCheeseOrionRestaurant.setOrder(1);
-        haveItemCheeseOrionRestaurant.setRestaurantCode(restaurant.getCode());
-        haveItemCheeseOrionRestaurant.setPrice(new BigDecimal("77.50"));
-
-
-        itemGroupLanches.addHaveItem(haveItemCheeseOrion);
-        itemGroupLanches.addHaveItem(haveItemCheeseOrionRestaurant);
-
-
-
-
-
-
-        /**
-         * O OptionGroup e os Options podem ser compartilhados.
-         */
-        OptionGroup optionGroupAdicionais = new OptionGroup();
-        optionGroupAdicionais.setLabel("Adicionais");
-
-        HaveOptionGroup haveOptionGroup = new HaveOptionGroup();
-        haveOptionGroup.setItem(itemHamburguer);
-        haveOptionGroup.setAvailable(true);
-        haveOptionGroup.setChainCode(chain.getCode());
-        haveOptionGroup.setOptionGroup(optionGroupAdicionais);
-        haveOptionGroup.setOrder(1);
-
-
         Option bacon = new Option();
-        bacon.setLabel("Bacon Picado");
-        bacon.setType(OptionType.TOPIC);
-
-        Option parmesao = new Option();
-        parmesao.setLabel("Parmesão Ralado");
-        parmesao.setType(OptionType.TOPIC);
-
-        HaveOption haveBacon = new HaveOption();
-        haveBacon.setOrder(1);
-        haveBacon.setPrice(new BigDecimal("3"));
-        haveBacon.setOption(bacon);
-        haveBacon.setAvailable(true);
-        haveBacon.setOptionGroup(optionGroupAdicionais);
-        haveBacon.setChainCode(chain.getCode());
-
-        // Desabilita apenas para o restaurant
-
-        HaveOption dontHaveBacon = new HaveOption();
-        dontHaveBacon.setOrder(1);
-        dontHaveBacon.setPrice(new BigDecimal("3"));
-        dontHaveBacon.setOption(bacon);
-        dontHaveBacon.setAvailable(true);
-        dontHaveBacon.setOptionGroup(optionGroupAdicionais);
-        dontHaveBacon.setRestaurantCode(restaurant.getCode());
-
-
-        HaveOption haveParmesao = new HaveOption();
-        haveParmesao.setOrder(2);
-        haveParmesao.setPrice(new BigDecimal("4"));
-        haveParmesao.setOption(parmesao);
-        haveParmesao.setOptionGroup(optionGroupAdicionais);
-        haveParmesao.setRestaurantCode(restaurant.getCode());
-
-
-        optionGroupAdicionais.addHaveOption(haveBacon);
-        optionGroupAdicionais.addHaveOption(haveParmesao);
-        optionGroupAdicionais.addHaveOption(dontHaveBacon);
-
-
+        bacon.setLabel("Bacon");
+        bacon.setCode("BACON");
+        optionGroupChipsTopics.createHaveOption(bacon,1, true, BigDecimal.ONE, true, chain.getCode(), null);
 
         /**
-         * Cria item Coca-Cola.
+         * Burger Extras OptionGroup
          */
-        Item itemCocaCola = new Item();
-        itemCocaCola.setCode("COCA_COLA");
-        itemCocaCola.setLabel("Coca-Cola");
+        OptionGroup optionGroupBurgerExtras = new OptionGroup();
+        optionGroupBurgerExtras.setCode("BURGER_EXTRAS");
+        optionGroupBurgerExtras.setLabel("Burger Extras");
+        optionGroupBurgerExtras.setType(OptionGroupType.EXTRA);
 
+        itemDoubleCheeseBurger.createHaveOptionGroup(optionGroupBurgerExtras, true, 1, true, 0, null, chain.getCode(), null);
+
+        Option salad = new Option();
+        salad.setLabel("Salad");
+        salad.setCode("SALAD");
+        optionGroupBurgerExtras.createHaveOption(salad,1,false, BigDecimal.ZERO, true, chain.getCode(), null);
+
+        Option extraBurger = new Option();
+        extraBurger.setLabel("Extra Burger");
+        extraBurger.setCode("EXTRA_BURGER");
+        optionGroupBurgerExtras.createHaveOption(extraBurger,1,true, new BigDecimal("3"), true, chain.getCode(), null);
+
+        optionGroupBurgerExtras.createHaveOption(bacon,1,true, new BigDecimal("2"), true, chain.getCode(), null);
 
         /**
-         * Cria HaveItem para a Fanta
+         * Create Onions option, but set avaiable = false, because it is only avaiable in combo.
          */
-        HaveItem haveItemCocaCola = new HaveItem();
-        haveItemCocaCola.setItemGroup(itemGroupBebidas);
-        haveItemCocaCola.setItem(itemCocaCola);
-        haveItemCocaCola.setOrder(1);
-        haveItemCocaCola.setAvailable(true);
-        haveItemCocaCola.setChainCode(chain.getCode());
-        haveItemCocaCola.setPrice(new BigDecimal("9.50"));
-
-        itemGroupBebidas.addHaveItem(haveItemCocaCola);
-
+        Option onionsOption = new Option();
+        onionsOption.setLabel("Onion");
+        onionsOption.setCode("ONION");
+        optionGroupBurgerExtras.createHaveOption(onionsOption,1,false, BigDecimal.ZERO, true, chain.getCode(), null);
 
         /**
-         * Cria item Fanta.
+         * Create Combo N. 5
          */
-        Item itemFanta = new Item();
-        itemFanta.setCode("FANTA");
-        itemFanta.setLabel("Fanta");
+        ItemCombo comboN5 = new ItemCombo();
+        comboN5.setLabel("Combo nº5");
+        comboN5.setCode("COMBON5");
+        comboN5.createHaveComboItem(itemDoubleCheeseBurger,true, BigDecimal.ZERO, null,1,1,chain.getCode(), null);
+        comboN5.createHaveComboOptionGroup(optionGroupBurgerExtras, true, 2, null, itemDoubleCheeseBurger.getCode(), true, 1, chain.getCode(), restaurant.getCode());
+
+        ItemGroup sideDishItemGroup = new ItemGroup();
+        sideDishItemGroup.setLabel("Side dish");
+        sideDishItemGroup.setCode("SIDE_DISH");
+        comboN5.createHaveComboItemGroup(sideDishItemGroup,true, 1,1, true, 1, chain.getCode(), null);
+
+        Item onionRings = new Item();
+        onionRings.setCode("ONION_RINGS");
+        onionRings.setLabel("Onion Rings");
+        sideDishItemGroup.createHaveItem(onionRings, 1, true, null , chain.getCode(), null);
+        sideDishItemGroup.createHaveItem(itemChips, 2, true, null, chain.getCode(), null);
+        comboN5.createHaveComboItem(onionRings,true, BigDecimal.ONE, sideDishItemGroup.getCode(),1,1,chain.getCode(), null);
 
 
-        /**
-         * Cria HaveItem para a Fanta
-         */
-        HaveItem haveItemFanta = new HaveItem();
-        haveItemFanta.setItemGroup(itemGroupBebidas);
-        haveItemFanta.setItem(itemFanta);
-        haveItemFanta.setOrder(1);
-        haveItemFanta.setRestaurantCode(restaurant.getCode());
-        haveItemFanta.setPrice(new BigDecimal("23.50"));
+        ItemGroup beverage = new ItemGroup();
+        beverage.setLabel("Beverage");
+        sideDishItemGroup.setCode("BEVERAGE");
+        comboN5.createHaveComboItemGroup(beverage,true, 1,1, true, 1, chain.getCode(), null);
 
-        itemGroupBebidas.addHaveItem(haveItemFanta);
+        Item itemSoda = new Item();
+        itemSoda.setCode("SODA");
+        itemSoda.setLabel("Soda");
+        comboN5.createHaveComboItem(itemSoda,true, BigDecimal.ZERO, beverage.getCode(),1,1,chain.getCode(), null);
 
 
-        /**
-         * Cria OptionGroup de Tamnanho de refrigerante (será compartilhado para todos os refrigerantes).
-         */
-        OptionGroup optionGroupSizeRefri = new OptionGroup();
-        optionGroupSizeRefri.setLabel("Tamanho Refrigerante");
-
-        Option option350ml = new Option();
-        option350ml.setType(OptionType.SIZE);
-        option350ml.setLabel("350 ml");
-        HaveOption haveOption350ml = new HaveOption();
-        haveOption350ml.setOrder(1);
-        haveOption350ml.setPrice(new BigDecimal("4.50"));
-        haveOption350ml.setOption(option350ml);
-        haveOption350ml.setOptionGroup(optionGroupSizeRefri);
-        optionGroupSizeRefri.addHaveOption(haveOption350ml);
+        Item itemJuice = new Item();
+        itemJuice.setCode("JUICE");
+        itemJuice.setLabel("Juice");
+        comboN5.createHaveComboItem(itemJuice,true, BigDecimal.ONE, beverage.getCode(),1,1,chain.getCode(), null);
 
 
+        OptionGroup sodaFlavorOptionGroup = new OptionGroup();
+        sodaFlavorOptionGroup.setLabel("Soda Flavor");
+        sodaFlavorOptionGroup.setCode("SODA_FLAVOR");
+        itemSoda.createHaveOptionGroup(sodaFlavorOptionGroup, true, 1, false, 1, 1, chain.getCode(), null);
 
+        Option colaOption = new Option();
+        colaOption.setLabel("Cola");
+        colaOption.setCode("COLA_OPTION");
+        sodaFlavorOptionGroup.createHaveOption(colaOption, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
-        Option option600ml = new Option();
-        option600ml.setType(OptionType.SIZE);
-        option600ml.setLabel("600 ml");
-        HaveOption haveOption600ml = new HaveOption();
-        haveOption600ml.setOrder(2);
-        haveOption600ml.setPrice(new BigDecimal("6.50"));
-        haveOption600ml.setOption(option600ml);
-        haveOption600ml.setOptionGroup(optionGroupSizeRefri);
-        optionGroupSizeRefri.addHaveOption(haveOption600ml);
+        Option drPepperOption = new Option();
+        drPepperOption.setLabel("Dr Pepper");
+        drPepperOption.setCode("DR_PEPPER_OPTION");
+        sodaFlavorOptionGroup.createHaveOption(drPepperOption, 2, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
+        OptionGroup juiceFlavorOptionGroup = new OptionGroup();
+        juiceFlavorOptionGroup.setCode("JUICE_FLAVOR");
+        juiceFlavorOptionGroup.setLabel("Juice Flavor");
+        itemJuice.createHaveOptionGroup(sodaFlavorOptionGroup, true, 1, false, 1, 1, chain.getCode(), null);
 
-        Option option2L = new Option();
-        option2L.setType(OptionType.SIZE);
-        option2L.setLabel("2 L");
-        HaveOption haveOption2L = new HaveOption();
-        haveOption2L.setOrder(2);
-        haveOption2L.setPrice(new BigDecimal("10.50"));
-        haveOption2L.setOption(option2L);
-        haveOption2L.setOptionGroup(optionGroupSizeRefri);
-        optionGroupSizeRefri.addHaveOption(haveOption2L);
+        Option orangeOption = new Option();
+        orangeOption.setLabel("Orange");
+        orangeOption.setCode("ORANGE_OPTION");
+        juiceFlavorOptionGroup.createHaveOption(orangeOption, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
-
-        HaveOptionGroup haveOptionGroupSizeCoca = new HaveOptionGroup();
-        haveOptionGroupSizeCoca.setOptionGroup(optionGroupSizeRefri);
-        haveOptionGroupSizeCoca.setItem(itemCocaCola);
-        itemCocaCola.addHaveOptionGroup(haveOptionGroupSizeCoca);
-
-
-        HaveOptionGroup haveOptionGroupSizeFanta = new HaveOptionGroup();
-        haveOptionGroupSizeFanta.setOptionGroup(optionGroupSizeRefri);
-        haveOptionGroupSizeFanta.setItem(itemFanta);
-        itemFanta.addHaveOptionGroup(haveOptionGroupSizeFanta);
+        Option lemonOption = new Option();
+        lemonOption.setLabel("Lemon");
+        lemonOption.setCode("LEMON_OPTION");
+        sodaFlavorOptionGroup.createHaveOption(lemonOption, 2, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
 
 
 
-        /**
-         * Tem fixo batata frita mais 2 coca-colas, caso
-         * queira deixar a opção mais flexivel como batata frita mais
-         * 2 refrigerantes é possivel cadastrar o sabor do refrigerante como um
-         * Option, e esse option do sabor, não deixar associado ao combo
-         * deixando a seleção para o usuário.
-         */
-        ItemCombo porcaoMais2Refrigerantes = new ItemCombo();
-        porcaoMais2Refrigerantes.setLabel("Batata-Frita mais 2 Fantas");
-        HaveComboItem porcaoMaisRefriHaveComboItemBatata = new HaveComboItem();
-        porcaoMaisRefriHaveComboItemBatata.setItem(itemCheeseBurger);
-        porcaoMaisRefriHaveComboItemBatata.setQty(1);
-        porcaoMaisRefriHaveComboItemBatata.setRestaurantCode(restaurant.getCode());
-        porcaoMaisRefriHaveComboItemBatata.setItemCombo(porcaoMais2Refrigerantes);
 
-        porcaoMais2Refrigerantes.addHaveComboItem(porcaoMaisRefriHaveComboItemBatata);
-
-        HaveComboItem porcaoMaisRefriHaveComboItemFanta = new HaveComboItem();
-        porcaoMaisRefriHaveComboItemFanta.setItem(itemFanta);
-        porcaoMaisRefriHaveComboItemFanta.setQty(2);
-        porcaoMaisRefriHaveComboItemFanta.setRestaurantCode(restaurant.getCode());
-
-
-        HaveComboItemOption comboItemOptionFanta = new HaveComboItemOption();
-        comboItemOptionFanta.setItemCode(itemFanta.getCode());
-        comboItemOptionFanta.setQty(2);
-        comboItemOptionFanta.setItemCombo(porcaoMais2Refrigerantes);
-        comboItemOptionFanta.setOption(option350ml);
-        comboItemOptionFanta.setRestaurantCode(restaurant.getCode());
-
-
-        HaveItemCombo haveItemComboPorcaoMais2Refrigerantes = new HaveItemCombo();
-        haveItemComboPorcaoMais2Refrigerantes.setRestaurantCode(restaurant.getCode());
-        haveItemComboPorcaoMais2Refrigerantes.setItemCombo(porcaoMais2Refrigerantes);
-        haveItemComboPorcaoMais2Refrigerantes.setItemGroup(itemGroupCombos);
-        haveItemComboPorcaoMais2Refrigerantes.setRestaurantCode(restaurant.getCode());
-        itemGroupCombos.addHaveItemCombo(haveItemComboPorcaoMais2Refrigerantes);
-
-        restaurantRepository.save(restaurant, -1);
-        menuRepository.save(menuChain, -1);
-        chainRepository.save(chain, -1);
-        itemGroupRepository.save(itemGroupCombos);
-        itemGroupRepository.save(itemGroupBebidas);
-        itemGroupRepository.save(itemGroupLanches);
-        optionGroupRepository.save(optionGroupAdicionais);
-        optionRepository.save(bacon);
-        optionRepository.save(parmesao);
-        itemRepository.save(itemCocaCola);
-        itemRepository.save(itemFanta);
-
-        itemRepository.save(itemCheeseBurger);
-        itemRepository.save(itemCheeseOrion);
-        itemRepository.save(itemDoubleCheeseBacon);
-        itemRepository.save(itemHamburguer);
-
-        optionRepository.save(option350ml);
-        optionRepository.save(option600ml);
-        optionRepository.save(option2L);
-        itemComboRepository.save(porcaoMais2Refrigerantes);
 
     }
 
-
-    private void createSingleRestaurant() {
-
-        /**
-         * Cria restaurante
-         */
-        Restaurant restaurant = new Restaurant();
-        restaurant.setCode("RJOAO");
-        restaurant.setName("Restaurante de João");
-
-
-        /**
-         * Cria Menu
-         */
-        Menu menu = new Menu();
-        menu.setCode("RJOAO_MENU_V01");
-        restaurant.setMenu(menu);
-
-
-        /**
-         * Cria ItemGroup Porções
-         */
-        ItemGroup itemGroupPorcoes = new ItemGroup();
-        itemGroupPorcoes.setCode("PORCOES");
-        itemGroupPorcoes.setLabel("Porções");
-
-        /**
-         * Cria ItemGroup Bebidas
-         */
-        ItemGroup itemGroupLanches = new ItemGroup();
-        itemGroupLanches.setCode("LANCHES");
-        itemGroupLanches.setLabel("Lanches");
-
-        /**
-         * Cria ItemGroup Bebidas
-         */
-        ItemGroup itemGroupBebidas = new ItemGroup();
-        itemGroupBebidas.setCode("BEBIDAS");
-        itemGroupBebidas.setLabel("Bebidas");
-
-
-        /**
-         * Cria relacionamento itemGroup com menu.
-         */
-        HaveItemGroup haveItemGroupPorcoes = new HaveItemGroup();
-        haveItemGroupPorcoes.setAvailable(true);
-        haveItemGroupPorcoes.setItemGroup(itemGroupPorcoes);
-        haveItemGroupPorcoes.setMenu(menu);
-        menu.addHaveItemGroup(haveItemGroupPorcoes);
-
-
-        /**
-         * Cria relacionamento itemGroup Bebidas com menu.
-         */
-        HaveItemGroup haveItemGroupBebidas = new HaveItemGroup();
-        haveItemGroupBebidas.setAvailable(true);
-        haveItemGroupBebidas.setItemGroup(itemGroupBebidas);
-        haveItemGroupBebidas.setMenu(menu);
-        menu.addHaveItemGroup(haveItemGroupBebidas);
-
-
-        /**
-         * Cria relacionamento itemGroup Lanches com menu.
-         */
-        HaveItemGroup haveItemGroupLanches = new HaveItemGroup();
-        haveItemGroupLanches.setAvailable(true);
-        haveItemGroupLanches.setItemGroup(itemGroupLanches);
-        haveItemGroupLanches.setMenu(menu);
-        menu.addHaveItemGroup(haveItemGroupLanches);
-
-
-        /**
-         * Cria item Cheese-Burger
-         */
-        Item itemCheeseBurger = new Item();
-        itemCheeseBurger.setCode("CHEESE-BURGER");
-        itemCheeseBurger.setLabel("Cheese Burger");
-
-        Item itemHamburguer = new Item();
-        itemHamburguer.setCode("HAMBURGER");
-        itemHamburguer.setLabel("Hamburger");
-
-        Item itemDoubleCheeseBacon = new Item();
-        itemDoubleCheeseBacon.setCode("DOUBLE-CHEESE-BACON");
-        itemDoubleCheeseBacon.setLabel("Double Cheese Burger");
-
-        Item itemCheeseOrion = new Item();
-        itemCheeseOrion.setCode("CHEESE-ORION");
-        itemCheeseOrion.setLabel("Cheese Orion");
-
-
-        HaveItem haveItemCheeseBurger = new HaveItem();
-        haveItemCheeseBurger.setItemGroup(itemGroupLanches);
-        haveItemCheeseBurger.setItem(itemCheeseBurger);
-        haveItemCheeseBurger.setOrder(1);
-        haveItemCheeseBurger.setRestaurantCode(restaurant.getCode());
-        haveItemCheeseBurger.setPrice(new BigDecimal("15.50"));
-
-        itemGroupLanches.addHaveItem(haveItemCheeseBurger);
-
-        HaveItem haveItemHamburguer = new HaveItem();
-        haveItemHamburguer.setItemGroup(itemGroupLanches);
-        haveItemHamburguer.setItem(itemCheeseBurger);
-        haveItemHamburguer.setOrder(1);
-        haveItemHamburguer.setRestaurantCode(restaurant.getCode());
-        haveItemHamburguer.setPrice(new BigDecimal("18.50"));
-
-        itemGroupLanches.addHaveItem(haveItemHamburguer);
-
-
-        HaveItem haveItemDoubleCheeseBacon = new HaveItem();
-        haveItemDoubleCheeseBacon.setItemGroup(itemGroupLanches);
-        haveItemDoubleCheeseBacon.setItem(itemDoubleCheeseBacon);
-        haveItemDoubleCheeseBacon.setOrder(1);
-        haveItemDoubleCheeseBacon.setRestaurantCode(restaurant.getCode());
-        haveItemDoubleCheeseBacon.setPrice(new BigDecimal("23.50"));
-
-        itemGroupLanches.addHaveItem(haveItemDoubleCheeseBacon);
-
-
-
-        /**
-         * Cria item Batata frita.
-         */
-        Item itemBatataFrita = new Item();
-        itemBatataFrita.setCode("BATATA_FRITA");
-        itemBatataFrita.setLabel("Batata Frita");
-
-        /**
-         * Cria HaveItem
-         */
-        HaveItem haveItemBatataFrita = new HaveItem();
-        haveItemBatataFrita.setItemGroup(itemGroupPorcoes);
-        haveItemBatataFrita.setItem(itemBatataFrita);
-        haveItemBatataFrita.setOrder(1);
-        haveItemBatataFrita.setRestaurantCode(restaurant.getCode());
-        haveItemBatataFrita.setPrice(new BigDecimal("23.50"));
-
-        itemGroupPorcoes.addHaveItem(haveItemBatataFrita);
-
-
-        /**
-         * Cria item Batata frita.
-         */
-        Item itemMandiocaFrita = new Item();
-        itemMandiocaFrita.setCode("MANDIOCA_FRITA");
-        itemMandiocaFrita.setLabel("Mandioca Frita");
-
-
-        /**
-         * Cria HaveItem
-         */
-        HaveItem haveItemMandiocaFrita = new HaveItem();
-        haveItemMandiocaFrita.setItemGroup(itemGroupPorcoes);
-        haveItemMandiocaFrita.setItem(itemMandiocaFrita);
-        haveItemMandiocaFrita.setOrder(1);
-        haveItemMandiocaFrita.setRestaurantCode(restaurant.getCode());
-        haveItemMandiocaFrita.setPrice(new BigDecimal("28.50"));
-
-        itemGroupPorcoes.addHaveItem(haveItemMandiocaFrita);
-
-
-        /**
-         * O OptionGroup e os Options podem ser compartilhados.
-         */
-        OptionGroup optionGroupAdicionais = new OptionGroup();
-        optionGroupAdicionais.setLabel("Adicionais");
-
-        HaveOptionGroup haveOptionGroup = new HaveOptionGroup();
-        haveOptionGroup.setItem(itemBatataFrita);
-        haveOptionGroup.setRestaurantCode(restaurant.getCode());
-        haveOptionGroup.setOptionGroup(optionGroupAdicionais);
-        haveOptionGroup.setOrder(1);
-
-
-        Option bacon = new Option();
-        bacon.setLabel("Bacon Picado");
-        bacon.setType(OptionType.TOPIC);
-
-        Option parmesao = new Option();
-        parmesao.setLabel("Parmesão Ralado");
-        parmesao.setType(OptionType.TOPIC);
-
-        HaveOption haveBacon = new HaveOption();
-        haveBacon.setOrder(1);
-        haveBacon.setPrice(new BigDecimal("3"));
-        haveBacon.setOption(bacon);
-        haveBacon.setOptionGroup(optionGroupAdicionais);
-        haveBacon.setRestaurantCode(restaurant.getCode());
-
-
-        HaveOption haveParmesao = new HaveOption();
-        haveParmesao.setOrder(2);
-        haveParmesao.setPrice(new BigDecimal("4"));
-        haveParmesao.setOption(parmesao);
-        haveParmesao.setOptionGroup(optionGroupAdicionais);
-        haveParmesao.setRestaurantCode(restaurant.getCode());
-
-
-        optionGroupAdicionais.addHaveOption(haveBacon);
-        optionGroupAdicionais.addHaveOption(haveParmesao);
-
-        HaveOptionGroup haveOptionGroupBatata = new HaveOptionGroup();
-        haveOptionGroupBatata.setOptionGroup(optionGroupAdicionais);
-        haveOptionGroupBatata.setItem(itemBatataFrita);
-        haveOptionGroupBatata.setRestaurantCode(restaurant.getCode());
-
-        itemBatataFrita.addHaveOptionGroup(haveOptionGroupBatata);
-
-        HaveOptionGroup haveOptionGroupMandioca = new HaveOptionGroup();
-        haveOptionGroupMandioca.setOptionGroup(optionGroupAdicionais);
-        haveOptionGroupMandioca.setItem(itemMandiocaFrita);
-        haveOptionGroupMandioca.setRestaurantCode(restaurant.getCode());
-
-        itemMandiocaFrita.addHaveOptionGroup(haveOptionGroupMandioca);
-
-
-        /**
-         * Cria item Coca-Cola.
-         */
-        Item itemCocaCola = new Item();
-        itemCocaCola.setCode("COCA_COLA");
-        itemCocaCola.setLabel("Coca-Cola");
-
-
-        /**
-         * Cria HaveItem para a Fanta
-         */
-        HaveItem haveItemCocaCola = new HaveItem();
-        haveItemCocaCola.setItemGroup(itemGroupBebidas);
-        haveItemCocaCola.setItem(itemCocaCola);
-        haveItemCocaCola.setOrder(1);
-        haveItemCocaCola.setAvailable(true);
-        haveItemCocaCola.setRestaurantCode(restaurant.getCode());
-        haveItemCocaCola.setPrice(new BigDecimal("9.50"));
-
-        itemGroupBebidas.addHaveItem(haveItemCocaCola);
-
-
-        /**
-         * Cria item Fanta.
-         */
-        Item itemFanta = new Item();
-        itemFanta.setCode("FANTA");
-        itemFanta.setLabel("Fanta");
-
-
-        /**
-         * Cria HaveItem para a Fanta
-         */
-        HaveItem haveItemFanta = new HaveItem();
-        haveItemFanta.setItemGroup(itemGroupBebidas);
-        haveItemFanta.setItem(itemFanta);
-        haveItemFanta.setOrder(1);
-        haveItemFanta.setAvailable(true);
-        haveItemFanta.setRestaurantCode(restaurant.getCode());
-        haveItemFanta.setPrice(new BigDecimal("23.50"));
-        itemGroupBebidas.addHaveItem(haveItemFanta);
-
-
-        /**
-         * Cria OptionGroup de Tamnanho de refrigerante (será compartilhado para todos os refrigerantes).
-         */
-        OptionGroup optionGroupSizeRefri = new OptionGroup();
-        optionGroupSizeRefri.setLabel("Tamanho Refrigerante");
-
-        Option option350ml = new Option();
-        option350ml.setType(OptionType.SIZE);
-        option350ml.setLabel("350 ml");
-        HaveOption haveOption350ml = new HaveOption();
-        haveOption350ml.setOrder(1);
-        haveOption350ml.setPrice(new BigDecimal("4.50"));
-        haveOption350ml.setOption(option350ml);
-        haveOption350ml.setRestaurantCode(restaurant.getCode());
-        haveOption350ml.setAvailable(true);
-        haveOption350ml.setOptionGroup(optionGroupSizeRefri);
-        optionGroupSizeRefri.addHaveOption(haveOption350ml);
-
-
-
-
-        Option option600ml = new Option();
-        option600ml.setType(OptionType.SIZE);
-        option600ml.setLabel("600 ml");
-        HaveOption haveOption600ml = new HaveOption();
-        haveOption600ml.setOrder(2);
-        haveOption600ml.setPrice(new BigDecimal("6.50"));
-        haveOption600ml.setOption(option600ml);
-        haveOption600ml.setOptionGroup(optionGroupSizeRefri);
-        haveOption600ml.setAvailable(true);
-        haveOption600ml.setRestaurantCode(restaurant.getCode());
-
-
-        optionGroupSizeRefri.addHaveOption(haveOption600ml);
-
-
-        Option option2L = new Option();
-        option2L.setType(OptionType.SIZE);
-        option2L.setLabel("2 L");
-        HaveOption haveOption2L = new HaveOption();
-        haveOption2L.setOrder(2);
-        haveOption2L.setPrice(new BigDecimal("10.50"));
-        haveOption2L.setOption(option2L);
-        haveOption2L.setOptionGroup(optionGroupSizeRefri);
-        haveOption2L.setAvailable(true);
-        haveOption2L.setRestaurantCode(restaurant.getCode());
-        optionGroupSizeRefri.addHaveOption(haveOption2L);
-
-
-        HaveOptionGroup haveOptionGroupSizeCoca = new HaveOptionGroup();
-        haveOptionGroupSizeCoca.setOptionGroup(optionGroupSizeRefri);
-        haveOptionGroupSizeCoca.setItem(itemCocaCola);
-        haveOptionGroupSizeCoca.setAvailable(true);
-        haveOptionGroupSizeCoca.setRestaurantCode(restaurant.getCode());
-        itemCocaCola.addHaveOptionGroup(haveOptionGroupSizeCoca);
-
-
-        HaveOptionGroup haveOptionGroupSizeFanta = new HaveOptionGroup();
-        haveOptionGroupSizeFanta.setOptionGroup(optionGroupSizeRefri);
-        haveOptionGroupSizeFanta.setItem(itemFanta);
-        haveOptionGroupSizeFanta.setAvailable(true);
-        haveOptionGroupSizeFanta.setRestaurantCode(restaurant.getCode());
-        itemFanta.addHaveOptionGroup(haveOptionGroupSizeFanta);
-
-
-        /**
-         * CommonItem pode ser utilizado para compartilhar itens entre restaurantes
-         */
-        CommonItemPool commonItemBebidas = new CommonItemPool();
-        commonItemBebidas.setCode("REFRIGERANTES");
-        CommonItem commonItemCocaCola = new CommonItem();
-        CommonItem commonItemFanta = new CommonItem();
-        commonItemCocaCola.addItem(itemCocaCola);
-        commonItemFanta.addItem(itemFanta);
-
-
-
-        /**
-         * Tem fixo batata frita mais 2 coca-colas, caso
-         * queira deixar a opção mais flexivel como batata frita mais
-         * 2 refrigerantes é possivel cadastrar o sabor do refrigerante como um
-         * Option, e esse option do sabor, não deixar associado ao combo
-         * deixando a seleção para o usuário.
-         */
-        ItemCombo porcaoMais2Refrigerantes = new ItemCombo();
-        porcaoMais2Refrigerantes.setLabel("Batata-Frita mais 2 Fantas");
-        HaveComboItem porcaoMaisRefriHaveComboItemBatata = new HaveComboItem();
-        porcaoMaisRefriHaveComboItemBatata.setItem(itemBatataFrita);
-        porcaoMaisRefriHaveComboItemBatata.setQty(1);
-        porcaoMaisRefriHaveComboItemBatata.setAvailable(true);
-        porcaoMaisRefriHaveComboItemBatata.setRestaurantCode(restaurant.getCode());
-        porcaoMaisRefriHaveComboItemBatata.setItemCombo(porcaoMais2Refrigerantes);
-
-        porcaoMais2Refrigerantes.addHaveComboItem(porcaoMaisRefriHaveComboItemBatata);
-
-        HaveComboItem porcaoMaisRefriHaveComboItemFanta = new HaveComboItem();
-        porcaoMaisRefriHaveComboItemFanta.setItem(itemFanta);
-        porcaoMaisRefriHaveComboItemFanta.setQty(2);
-        porcaoMaisRefriHaveComboItemFanta.setRestaurantCode(restaurant.getCode());
-
-
-
-        HaveComboItemOption comboItemOptionFanta = new HaveComboItemOption();
-        comboItemOptionFanta.setItemCode(itemFanta.getCode());
-        comboItemOptionFanta.setQty(2);
-        comboItemOptionFanta.setItemCombo(porcaoMais2Refrigerantes);
-        comboItemOptionFanta.setOption(option350ml);
-        comboItemOptionFanta.setRestaurantCode(restaurant.getCode());
-        comboItemOptionFanta.setAvailable(true);
-
-
-
-        HaveItemCombo haveItemComboPorcaoMais2Refrigerantes = new HaveItemCombo();
-        haveItemComboPorcaoMais2Refrigerantes.setRestaurantCode(restaurant.getCode());
-        haveItemComboPorcaoMais2Refrigerantes.setItemCombo(porcaoMais2Refrigerantes);
-        haveItemComboPorcaoMais2Refrigerantes.setItemGroup(itemGroupPorcoes);
-        haveItemComboPorcaoMais2Refrigerantes.setRestaurantCode(restaurant.getCode());
-        comboItemOptionFanta.setAvailable(true);
-        itemGroupPorcoes.addHaveItemCombo(haveItemComboPorcaoMais2Refrigerantes);
-
-
-
-
-
-
-
-
-        restaurantRepository.save(restaurant);
-        menuRepository.save(menu, -1);
-        itemGroupRepository.save(itemGroupPorcoes);
-        itemGroupRepository.save(itemGroupBebidas);
-        itemGroupRepository.save(itemGroupLanches);
-        itemRepository.save(itemBatataFrita);
-        itemGroupRepository.save(itemGroupPorcoes);
-        itemRepository.save(itemMandiocaFrita);
-        optionGroupRepository.save(optionGroupAdicionais);
-        optionRepository.save(bacon);
-        optionRepository.save(parmesao);
-        itemRepository.save(itemBatataFrita);
-        itemRepository.save(itemCocaCola);
-        itemRepository.save(itemFanta);
-
-        itemRepository.save(itemCheeseBurger);
-        itemRepository.save(itemCheeseOrion);
-        itemRepository.save(itemDoubleCheeseBacon);
-        itemRepository.save(itemHamburguer);
-
-        optionRepository.save(option350ml);
-        optionRepository.save(option600ml);
-        optionRepository.save(option2L);
-        commonItemPoolRepository.save(commonItemBebidas);
-        itemComboRepository.save(porcaoMais2Refrigerantes);
-
-    }
 
 
     private void createTestData() {
-        //createSingleRestaurant();
-        //createChainAndRestaurant();
+        createFictionalRestaurantMenu();
     }
 
 

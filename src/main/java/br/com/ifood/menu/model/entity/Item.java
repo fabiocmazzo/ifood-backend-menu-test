@@ -72,6 +72,20 @@ public class Item {
         this.haveOptionGroupSet.add(haveOptionGroup);
     }
 
+    public void createHaveOptionGroup(OptionGroup optionGroup, Boolean available, Integer order, Boolean canRepeat, Integer minOptions, Integer maxOptions, String chainCode, String restaurantCode) {
+        HaveOptionGroup haveOptionGroup = new HaveOptionGroup();
+        haveOptionGroup.setItem(this);
+        haveOptionGroup.setAvailable(available);
+        haveOptionGroup.setChainCode(chainCode);
+        haveOptionGroup.setCanRepeat(canRepeat);
+        haveOptionGroup.setMinOptions(minOptions);
+        haveOptionGroup.setMaxOptions(maxOptions);
+        haveOptionGroup.setRestaurantCode(restaurantCode);
+        haveOptionGroup.setOptionGroup(optionGroup);
+        haveOptionGroup.setOrder(order);
+        this.addHaveOptionGroup(haveOptionGroup);
+    }
+
     public Template getTemplate() {
         return template;
     }

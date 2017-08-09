@@ -6,6 +6,7 @@ import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -67,6 +68,20 @@ public class ItemGroup {
         }
         this.haveItemList.add(haveItem);
     }
+
+    public void createHaveItem(Item item, Integer order, Boolean available, BigDecimal startPrice, String chainCode, String restaurantCode) {
+        HaveItem haveItem = new HaveItem();
+        haveItem.setItemGroup(this);
+        haveItem.setItem(item);
+        haveItem.setOrder(order);
+        haveItem.setAvailable(available);
+        haveItem.setChainCode(chainCode);
+        haveItem.setRestaurantCode(restaurantCode);
+        haveItem.setStartPrice(startPrice);
+        this.addHaveItem(haveItem);
+    }
+
+
 
     public Set<HaveItemCombo> getHaveItemComboSet() {
         return haveItemComboSet;

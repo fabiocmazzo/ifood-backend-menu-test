@@ -29,6 +29,9 @@ public class HaveOption {
     private String chainCode;
 
     @Property
+    private Boolean canRepeat;
+
+    @Property
     private String restaurantCode;
 
     @StartNode
@@ -94,6 +97,14 @@ public class HaveOption {
 
     public void setChainCode(String chainCode) {
         this.chainCode = chainCode;
+    }
+
+    public Boolean getCanRepeat() {
+        return canRepeat;
+    }
+
+    public void setCanRepeat(Boolean canRepeat) {
+        this.canRepeat = canRepeat;
     }
 
     public String getRestaurantCode() {

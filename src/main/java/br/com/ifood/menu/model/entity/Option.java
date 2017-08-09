@@ -1,6 +1,7 @@
 package br.com.ifood.menu.model.entity;
 
 import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
@@ -13,12 +14,10 @@ public class Option {
     @GraphId
     private Long id;
 
-    private String label;
+    @Index(unique=true)
+    private String code;
 
-    /**
-     * Option Type can be SIZE, TOPING, etc
-     */
-    private String type;
+    private String label;
 
     public Long getId() {
         return id;
@@ -26,6 +25,14 @@ public class Option {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getLabel() {
@@ -36,11 +43,4 @@ public class Option {
         this.label = label;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

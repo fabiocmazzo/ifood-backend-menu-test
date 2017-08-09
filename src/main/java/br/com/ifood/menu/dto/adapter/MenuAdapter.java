@@ -98,7 +98,7 @@ public class MenuAdapter {
         itemDto.setCode(haveItem.getItem().getCode());
         itemDto.setLabel(haveItem.getItem().getLabel());
         itemDto.setOrder(haveItem.getOrder());
-        itemDto.setPrice(haveItem.getPrice());
+        itemDto.setPrice(haveItem.getStartPrice());
         itemDto.setQty(1);
         if (haveItem.getItem().getHaveOptionGroupSet() != null) {
             List<OptionGroupDto> optionDtoList = haveItem.getItem().getHaveOptionGroupSet().stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());

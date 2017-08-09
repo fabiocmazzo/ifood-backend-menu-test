@@ -16,9 +16,9 @@ public interface MenuRepository extends Neo4jRepository<Menu, Long> {
 
    Menu findByCode(String code);
 
-    @Query("MATCH (n:Restaurant) WHERE n.code = {0}  WITH n MATCH p=(n)-[rel:HAVE_COMBO_ITEM|HAVE_COMBO_OPTION_GROUP|HAVE_ITEM|HAVE_ITEM_COMBO|HAVE_ITEM_GROUP|HAVE_MENU|HAVE_OPTION|HAVE_OPTION_GROUP|HAVE_OPTION_TYPE_ITEM|HAVE_OPTION_TYPE_OPTION_GROUP*0..]-(m) where all(x in rel where x.restaurantCode = n.code or not exists(x.restaurantCode)) RETURN p " +
+    @Query("MATCH (n:Restaurant) WHERE n.code = {0}  WITH n MATCH p=(n)-[rel*0..]-(m) where all(x in rel where x.restaurantCode = n.code or not exists(x.restaurantCode)) RETURN p " +
            "UNION " +
-           "MATCH (n:Restaurant)-->(c:Chain) WHERE n.code = {0}  WITH n MATCH p=(n)-[rel:HAVE_COMBO_ITEM|HAVE_COMBO_OPTION_GROUP|HAVE_ITEM|HAVE_ITEM_COMBO|HAVE_ITEM_GROUP|HAVE_MENU|HAVE_OPTION|HAVE_OPTION_GROUP|HAVE_OPTION_TYPE_ITEM|HAVE_OPTION_TYPE_OPTION_GROUP*0..]-(m) where all(x in rel where x.restaurantCode = n.code or x.chainCode is not null or  (not exists(x.restaurantCode) and not exists(x.chainCode))  ) RETURN p")
+           "MATCH (n:Restaurant)-->(c:Chain) WHERE n.code = {0}  WITH n MATCH p=(n)-[rel*0..]-(m) where all(x in rel where x.restaurantCode = n.code or x.chainCode is not null or  (not exists(x.restaurantCode) and not exists(x.chainCode))  ) RETURN p")
     Menu findRelated(String code);
 
 }

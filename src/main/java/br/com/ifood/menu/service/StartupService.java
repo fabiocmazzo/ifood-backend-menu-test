@@ -187,7 +187,14 @@ public class StartupService {
         comboN5.setLabel("Combo nº5");
         comboN5.setCode("COMBON5");
         comboN5.createHaveComboItem(itemDoubleCheeseBurger, true, BigDecimal.ZERO, null, 1, 1, chain.getCode(), null);
-        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("17"), chain.getCode(), null);
+
+
+        // Vou colocar o combo no Chain a 7 reais e no restaurant a 17 reais, o que deve voltar pelo REST é o de 17 reais
+        // vou deixar comentado a criação de um relacionamento para um código de outro restaurante que servirá para validar
+        // que está retornando apenas o do Chain e do Restaurant pesquisado.
+        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("7"), chain.getCode(), null);
+        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("17"), null, restaurant.getCode());
+
 
         OptionGroup sideDishOptionGroup = new OptionGroup();
         sideDishOptionGroup.setCode("OG_SIDE_DISH");
@@ -295,6 +302,7 @@ public class StartupService {
         optionItemLemon.setCode("OPTION_ITEM_DR_PEPPER");
         optionItemLemon.setLabel("Dr Pepper");
         optionItemLemon.setItem(itemLemonJuice);
+
         optionGroupJuice.createHaveOption(optionItemLemon, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
         comboN5.createHaveComboOptionGroup(beverageOptionGroup, false, 1, 1,true, 1,chain.getCode(), null);

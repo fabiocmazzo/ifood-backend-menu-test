@@ -34,7 +34,7 @@ public class MenuAdapter {
         itemDto.setStartPrice(BigDecimal.ZERO);
         itemDto.setQty(1);
         if (item.getHaveOptionGroupSet() != null) {
-            List<OptionGroupDto> optionDtoList = item.getHaveOptionGroupSet().stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
+            List<OptionGroupDto> optionDtoList = RelationshipFilter.filterHaveOptionGroup(item.getHaveOptionGroupSet()).stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
             itemDto.setOptionGroupDtoList(optionDtoList);
         }
         return itemDto;
@@ -59,7 +59,7 @@ public class MenuAdapter {
         optionGroupDto.setCanRepeat(canRepeat);
         optionGroupDto.setLabel(optionGroup.getLabel());
         if (optionGroup.getHaveOptionList() != null) {
-            List<OptionDto> optionDtoList = optionGroup.getHaveOptionList().stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
+            List<OptionDto> optionDtoList = RelationshipFilter.filterHaveOption(optionGroup.getHaveOptionList()).stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
             optionGroupDto.setOptionDtoList(optionDtoList);
         }
         return optionGroupDto;
@@ -79,6 +79,12 @@ public class MenuAdapter {
         optionDto.setOrder(haveOption.getOrder());
         optionDto.setAdditionalPrice(haveOption.getPrice());
         optionDto.setCanRepeat(haveOption.getCanRepeat());
+
+
+
+
+
+
         Item item = haveOption.getOption().getItem();
         if (item != null) {
             optionDto.setItemDto(adapt(item, optionDto.getAvailable()));
@@ -109,7 +115,7 @@ public class MenuAdapter {
         optionGroupDto.setLabel(haveComboOptionGroup.getOptionGroup().getLabel());
         optionGroupDto.setType(haveComboOptionGroup.getOptionGroup().getType());
         if (haveComboOptionGroup.getOptionGroup().getHaveOptionList() != null) {
-            List<OptionDto> optionDtoList = haveComboOptionGroup.getOptionGroup().getHaveOptionList().stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
+            List<OptionDto> optionDtoList = RelationshipFilter.filterHaveOption(haveComboOptionGroup.getOptionGroup().getHaveOptionList()).stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
             optionGroupDto.setOptionDtoList(optionDtoList);
         }
         return optionGroupDto;
@@ -135,7 +141,7 @@ public class MenuAdapter {
         optionGroupDto.setType(haveOptionGroup.getOptionGroup().getType());
 
         if (haveOptionGroup.getOptionGroup().getHaveOptionList() != null) {
-            List<OptionDto> optionDtoList = haveOptionGroup.getOptionGroup().getHaveOptionList().stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
+            List<OptionDto> optionDtoList = RelationshipFilter.filterHaveOption(haveOptionGroup.getOptionGroup().getHaveOptionList()).stream().map(haveOption -> adapt(haveOption)).collect(Collectors.toList());
             optionGroupDto.setOptionDtoList(optionDtoList);
         }
         return optionGroupDto;
@@ -158,7 +164,7 @@ public class MenuAdapter {
         itemDto.setQty(haveComboItem.getQty());
         itemDto.setAvailable(haveComboItem.getAvailable());
         if (haveComboItem.getItem().getHaveOptionGroupSet() != null) {
-            List<OptionGroupDto> optionDtoList = haveComboItem.getItem().getHaveOptionGroupSet().stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
+            List<OptionGroupDto> optionDtoList = RelationshipFilter.filterHaveOptionGroup(haveComboItem.getItem().getHaveOptionGroupSet()).stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
             itemDto.setOptionGroupDtoList(optionDtoList);
         }
         return itemDto;
@@ -180,12 +186,12 @@ public class MenuAdapter {
         itemComboDto.setOrder(haveItemCombo.getOrder());
 
         if (haveItemCombo.getItemCombo().getHaveComboItemSet() != null) {
-            List<ItemDto> itemDtoList = haveItemCombo.getItemCombo().getHaveComboItemSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
+           List<ItemDto> itemDtoList = RelationshipFilter.filterHaveComboItem(haveItemCombo.getItemCombo().getHaveComboItemSet()).stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
             itemComboDto.setItemDtoList(itemDtoList);
         }
 
         if (haveItemCombo.getItemCombo().getHaveComboOptionGroupSet() != null) {
-            List<OptionGroupDto> optionGroupDtoList = haveItemCombo.getItemCombo().getHaveComboOptionGroupSet().stream().map(haveComboOptionGroup -> adapt(haveComboOptionGroup)).collect(Collectors.toList());
+        List<OptionGroupDto> optionGroupDtoList = RelationshipFilter.filterHaveComboOptionGroup(haveItemCombo.getItemCombo().getHaveComboOptionGroupSet()).stream().map(haveComboOptionGroup -> adapt(haveComboOptionGroup)).collect(Collectors.toList());
             itemComboDto.setOptionGroupDtoList(optionGroupDtoList);
         }
         return itemComboDto;
@@ -207,7 +213,7 @@ public class MenuAdapter {
         itemDto.setAvailable(haveItem.getAvailable());
         itemDto.setQty(1);
         if (haveItem.getItem().getHaveOptionGroupSet() != null) {
-            List<OptionGroupDto> optionDtoList = haveItem.getItem().getHaveOptionGroupSet().stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
+            List<OptionGroupDto> optionDtoList = RelationshipFilter.filterHaveOptionGroup(haveItem.getItem().getHaveOptionGroupSet()).stream().map(haveOptionGroup -> adapt(haveOptionGroup)).collect(Collectors.toList());
             itemDto.setOptionGroupDtoList(optionDtoList);
         }
         return itemDto;
@@ -225,12 +231,12 @@ public class MenuAdapter {
         itemGroupDto.setLabel(haveItemGroup.getItemGroup().getLabel());
         itemGroupDto.setAvailable(haveItemGroup.getAvailable());
         if (haveItemGroup.getItemGroup().getHaveItemList() != null) {
-            List<ItemDto> itemDtoList = haveItemGroup.getItemGroup().getHaveItemList().stream().map(haveItem -> adapt(haveItem)).collect(Collectors.toList());
+            List<ItemDto> itemDtoList = RelationshipFilter.filterHaveItem(haveItemGroup.getItemGroup().getHaveItemList()).stream().map(haveItem -> adapt(haveItem)).collect(Collectors.toList());
             itemGroupDto.setItemDtoList(itemDtoList);
         }
 
         if (haveItemGroup.getItemGroup().getHaveItemComboSet() != null) {
-            List<ItemComboDto> itemComboDtoList = haveItemGroup.getItemGroup().getHaveItemComboSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
+            List<ItemComboDto> itemComboDtoList = RelationshipFilter.filterHaveItemCombo(haveItemGroup.getItemGroup().getHaveItemComboSet()).stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
             itemGroupDto.setItemComboDtoList(itemComboDtoList);
         }
 

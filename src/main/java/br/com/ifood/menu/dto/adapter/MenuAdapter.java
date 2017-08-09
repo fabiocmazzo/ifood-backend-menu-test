@@ -219,6 +219,7 @@ public class MenuAdapter {
     private static ItemGroupDto adapt(HaveItemGroup haveItemGroup) {
         ItemGroupDto itemGroupDto = new ItemGroupDto();
         itemGroupDto.setLabel(haveItemGroup.getItemGroup().getLabel());
+        itemGroupDto.setAvailable(haveItemGroup.getAvailable());
         if (haveItemGroup.getItemGroup().getHaveItemList() != null) {
             List<ItemDto> itemDtoList = haveItemGroup.getItemGroup().getHaveItemList().stream().map(haveItem -> adapt(haveItem)).collect(Collectors.toList());
             itemGroupDto.setItemDtoList(itemDtoList);

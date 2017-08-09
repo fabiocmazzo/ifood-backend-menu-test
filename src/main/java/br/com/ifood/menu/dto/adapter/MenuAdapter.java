@@ -77,6 +77,7 @@ public class MenuAdapter {
         optionDto.setLabel(haveOption.getOption().getLabel());
         optionDto.setOrder(haveOption.getOrder());
         optionDto.setAdditionalPrice(haveOption.getPrice());
+        optionDto.setCanRepeat(haveOption.getCanRepeat());
         Item item = haveOption.getOption().getItem();
         if (item != null) {
             optionDto.setItemDto(adapt(item, optionDto.getAvailable()));

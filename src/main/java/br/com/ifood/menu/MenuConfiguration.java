@@ -16,8 +16,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 @ComponentScan
 public class MenuConfiguration {
 
-    @Value("${redis.uri}")
-    private String redisURI;
+    @Value("${redis.host}")
+    private String redisHost;
+
+    @Value("${redis.port}")
+    private Integer redisPort;
 
    @Bean
     public RedisTemplate<String, Object> redisTemplate() {
@@ -29,8 +32,8 @@ public class MenuConfiguration {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
-        jedisConFactory.setHostName(redisURI);
-        jedisConFactory.setPort(6379);
+        jedisConFactory.setHostName(redisHost);
+        jedisConFactory.setPort(redisPort);
         return jedisConFactory;
     }
 

@@ -96,6 +96,13 @@ public class ItemCombo {
         haveComboOptionSet.add(haveComboOption);
     }
 
+    public void addHaveComboItem(HaveComboItem haveComboItem) {
+        if (this.haveComboItemSet == null) {
+            this.haveComboItemSet = new HashSet<>();
+        }
+        haveComboItemSet.add(haveComboItem);
+    }
+
 
    public void createHaveComboItem(Item item, Boolean available, BigDecimal additionalPrice, String itemGroupCode, Integer order, Integer qty, String chainCode, String restaurantCode) {
         HaveComboItem haveComboItem = new HaveComboItem();
@@ -108,6 +115,7 @@ public class ItemCombo {
         haveComboItem.setChainCode(chainCode);
         haveComboItem.setRestaurantCode(restaurantCode);
         haveComboItem.setItemCombo(this);
+        this.addHaveComboItem(haveComboItem);
     }
 
     public void createHaveComboOptionGroup(OptionGroup optionGroup, Boolean canRepeat, Integer minOptions, Integer maxOptions, Boolean available, Integer order, String chainCode, String restaurantCode) {

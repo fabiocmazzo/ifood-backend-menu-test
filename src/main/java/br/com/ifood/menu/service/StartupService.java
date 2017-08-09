@@ -204,7 +204,7 @@ public class StartupService {
         optionChips.setCode("OPTION_ONION_RINGS");
         optionChips.setItem(itemChips);
         sideDishOptionGroup.createHaveOption(optionChips, 1, true, BigDecimal.ZERO, true, chain.getCode(), null);
-
+        comboN5.createHaveComboOptionGroup(sideDishOptionGroup, false, 1, 1, true, 2, chain.getCode(), null);
 
 
         OptionGroup beverageOptionGroup = new OptionGroup();

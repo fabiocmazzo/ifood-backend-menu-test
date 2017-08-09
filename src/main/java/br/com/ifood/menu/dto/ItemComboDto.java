@@ -1,5 +1,7 @@
 package br.com.ifood.menu.dto;
 
+import org.neo4j.ogm.annotation.Relationship;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,8 +21,10 @@ public class ItemComboDto implements Serializable {
 
     private String code;
 
+    @Relationship
     private List<ItemDto> itemDtoList;
 
+    @Relationship
     private List<OptionGroupDto> optionGroupDtoList;
 
     private BigDecimal startPrice;

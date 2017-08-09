@@ -24,17 +24,11 @@ public class ItemCombo {
 
     private String code;
 
-    @Relationship
+    @Relationship(type="HAVE_COMBO_ITEM")
     private Set<HaveComboItem> haveComboItemSet;
 
-    @Relationship
+    @Relationship(type="HAVE_COMBO_OPTION_GROUP")
     private Set<HaveComboOptionGroup> haveComboOptionGroupSet;
-
-    /**
-     * Realmente é necessário??? Verificar removação
-     */
-    @Relationship
-    private Set<HaveComboOption> haveComboOptionSet;
 
     public Long getId() {
         return id;

@@ -176,6 +176,7 @@ public class MenuAdapter {
         itemComboDto.setLabel(haveItemCombo.getItemCombo().getLabel());
         itemComboDto.setStartPrice(haveItemCombo.getStartPrice());
         itemComboDto.setAvailable(haveItemCombo.getAvailable());
+
         if (haveItemCombo.getItemCombo().getHaveComboItemSet() != null) {
             List<ItemDto> itemDtoList = haveItemCombo.getItemCombo().getHaveComboItemSet().stream().map(haveComboItem -> adapt(haveComboItem)).collect(Collectors.toList());
             itemComboDto.setItemDtoList(itemDtoList);

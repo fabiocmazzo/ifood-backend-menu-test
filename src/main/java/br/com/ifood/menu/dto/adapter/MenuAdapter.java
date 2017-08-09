@@ -27,7 +27,7 @@ public class MenuAdapter {
         optionDto.setLabel(haveOption.getOption().getLabel());
         optionDto.setOrder(haveOption.getOrder());
         optionDto.setPrice(haveOption.getPrice());
-        optionDto.setType(haveOption.getOption().getType());
+        //optionDto.setType(haveOption.getOption().getType());
         return optionDto;
     }
 

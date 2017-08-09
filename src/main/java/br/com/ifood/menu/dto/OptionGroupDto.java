@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class OptionGroupDto implements Serializable {
 
+    private static final long serialVersionUID = -9133657394643773512L;
+    
     private String label;
 
     private Integer order;

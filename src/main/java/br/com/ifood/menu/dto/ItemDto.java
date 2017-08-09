@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class ItemDto implements Serializable {
 
+    private static final long serialVersionUID = 1705434706214723586L;
+
     private String code;
 
     private String label;

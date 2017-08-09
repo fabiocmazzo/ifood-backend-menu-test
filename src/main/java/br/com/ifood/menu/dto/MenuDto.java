@@ -8,13 +8,16 @@ import java.util.List;
 
 /**
  * Class MenuDto for Menu response.
+ *
  * @author Fabio Covolo Mazzo
  */
 public class MenuDto implements Serializable {
 
-  private String code;
+    private static final long serialVersionUID = -1408095429551652614L;
 
-  private List<ItemGroupDto> itemGroupDtoList;
+    private String code;
+
+    private List<ItemGroupDto> itemGroupDtoList;
 
     private Boolean available;
 

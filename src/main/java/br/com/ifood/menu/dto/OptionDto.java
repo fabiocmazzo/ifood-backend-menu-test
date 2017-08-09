@@ -12,6 +12,8 @@ import java.math.BigDecimal;
  */
 public class OptionDto implements Serializable {
 
+    private static final long serialVersionUID = 5320775881531236500L;
+
     private String label;
 
     /**

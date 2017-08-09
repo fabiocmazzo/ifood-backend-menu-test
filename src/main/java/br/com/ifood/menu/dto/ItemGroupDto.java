@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class ItemGroupDto implements Serializable {
 
+    private static final long serialVersionUID = -8859697065090235679L;
+
     private String label;
 
     private List<ItemDto> itemDtoList;

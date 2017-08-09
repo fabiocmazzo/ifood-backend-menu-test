@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class ItemComboDto implements Serializable {
 
+    private static final long serialVersionUID = -2273929810948551865L;
+
     private String label;
 
     private String code;

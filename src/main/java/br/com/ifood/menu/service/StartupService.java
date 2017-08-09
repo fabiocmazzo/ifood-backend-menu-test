@@ -198,12 +198,15 @@ public class StartupService {
         Item itemSoda = new Item();
         itemSoda.setCode("SODA");
         itemSoda.setLabel("Soda");
+        beverage.createHaveItem(itemSoda, 1, true, BigDecimal.ZERO, chain.getCode(), null);
         comboN5.createHaveComboItem(itemSoda, true, BigDecimal.ZERO, beverage.getCode(), 1, 1, chain.getCode(), null);
+
 
         Item itemJuice = new Item();
         itemJuice.setCode("JUICE");
         itemJuice.setLabel("Juice");
         comboN5.createHaveComboItem(itemJuice, true, BigDecimal.ONE, beverage.getCode(), 1, 1, chain.getCode(), null);
+        beverage.createHaveItem(itemJuice, 1, true, BigDecimal.ZERO, chain.getCode(), null);
 
         OptionGroup sodaFlavorOptionGroup = new OptionGroup();
         sodaFlavorOptionGroup.setLabel("Soda Flavor");
@@ -223,7 +226,7 @@ public class StartupService {
         OptionGroup juiceFlavorOptionGroup = new OptionGroup();
         juiceFlavorOptionGroup.setCode("JUICE_FLAVOR");
         juiceFlavorOptionGroup.setLabel("Juice Flavor");
-        itemJuice.createHaveOptionGroup(sodaFlavorOptionGroup, true, 1, false, 1, 1, chain.getCode(), null);
+        itemJuice.createHaveOptionGroup(juiceFlavorOptionGroup, true, 1, false, 1, 1, chain.getCode(), null);
 
         Option orangeOption = new Option();
         orangeOption.setLabel("Orange");
@@ -233,7 +236,7 @@ public class StartupService {
         Option lemonOption = new Option();
         lemonOption.setLabel("Lemon");
         lemonOption.setCode("LEMON_OPTION");
-        sodaFlavorOptionGroup.createHaveOption(lemonOption, 2, false, BigDecimal.ZERO, true, chain.getCode(), null);
+        juiceFlavorOptionGroup.createHaveOption(lemonOption, 2, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
         menuRepository.save(menuChain, -1);
         itemComboRepository.save(comboN5, -1);

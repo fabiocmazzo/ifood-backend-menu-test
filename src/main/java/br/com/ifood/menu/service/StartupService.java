@@ -70,9 +70,6 @@ public class StartupService {
         chain.setMenu(menuChain);
 
 
-
-
-
         /**
          *  ItemGroups
          */
@@ -175,82 +172,133 @@ public class StartupService {
         comboN5.setLabel("Combo nº5");
         comboN5.setCode("COMBON5");
         comboN5.createHaveComboItem(itemDoubleCheeseBurger, true, BigDecimal.ZERO, null, 1, 1, chain.getCode(), null);
-        comboN5.createHaveComboOptionGroup(optionGroupBurgerExtras, true, 2, null, itemDoubleCheeseBurger.getCode(), true, 1, chain.getCode(), restaurant.getCode());
-
-        ItemGroup sideDishItemGroup = new ItemGroup();
-        sideDishItemGroup.setLabel("Side dish");
-        sideDishItemGroup.setCode("SIDE_DISH");
-        comboN5.createHaveComboItemGroup(sideDishItemGroup, true, 1, 1, true, 1, chain.getCode(), null);
-
-        Item onionRings = new Item();
-        onionRings.setCode("ONION_RINGS");
-        onionRings.setLabel("Onion Rings");
-        sideDishItemGroup.createHaveItem(onionRings, 1, true, null, chain.getCode(), null);
-        sideDishItemGroup.createHaveItem(itemChips, 2, true, null, chain.getCode(), null);
-        comboN5.createHaveComboItem(onionRings, true, BigDecimal.ONE, sideDishItemGroup.getCode(), 1, 1, chain.getCode(), null);
+        comboN5.createHaveComboOptionGroup(optionGroupBurgerExtras, true, 2, null, true, 1, chain.getCode(), restaurant.getCode());
 
 
-        ItemGroup beverage = new ItemGroup();
-        beverage.setLabel("Beverage");
-        sideDishItemGroup.setCode("BEVERAGE");
-        comboN5.createHaveComboItemGroup(beverage, true, 1, 1, true, 1, chain.getCode(), null);
 
-        Item itemSoda = new Item();
-        itemSoda.setCode("SODA");
-        itemSoda.setLabel("Soda");
-        beverage.createHaveItem(itemSoda, 1, true, BigDecimal.ZERO, chain.getCode(), null);
-        comboN5.createHaveComboItem(itemSoda, true, BigDecimal.ZERO, beverage.getCode(), 1, 1, chain.getCode(), null);
+        OptionGroup sideDishOptionGroup = new OptionGroup();
+        sideDishOptionGroup.setCode("OG_SIDE_DISH");
+        sideDishOptionGroup.setLabel("Side Dish");
+        sideDishOptionGroup.setType(OptionGroupType.ITEM);
+
+        Item itemOnionRings = new Item();
+        itemOnionRings.setLabel("Onion Rings");
+        itemOnionRings.setCode("OPTION_ONION_RINGS_ITEM");
+
+        Option optionOnionRings = new Option();
+        optionOnionRings.setLabel("Onion Rings");
+        optionOnionRings.setCode("OPTION_ONION_RINGS");
+        optionOnionRings.setItem(itemOnionRings);
+        sideDishOptionGroup.createHaveOption(optionOnionRings, 1, true, BigDecimal.ONE, true, chain.getCode(), null);
 
 
-        Item itemJuice = new Item();
-        itemJuice.setCode("JUICE");
-        itemJuice.setLabel("Juice");
-        comboN5.createHaveComboItem(itemJuice, true, BigDecimal.ONE, beverage.getCode(), 1, 1, chain.getCode(), null);
-        beverage.createHaveItem(itemJuice, 1, true, BigDecimal.ZERO, chain.getCode(), null);
+        Option optionChips = new Option();
+        optionChips.setLabel("Onion Rings");
+        optionChips.setCode("OPTION_ONION_RINGS");
+        optionChips.setItem(itemChips);
+        sideDishOptionGroup.createHaveOption(optionChips, 1, true, BigDecimal.ZERO, true, chain.getCode(), null);
 
-        OptionGroup sodaFlavorOptionGroup = new OptionGroup();
-        sodaFlavorOptionGroup.setLabel("Soda Flavor");
-        sodaFlavorOptionGroup.setCode("SODA_FLAVOR");
-        itemSoda.createHaveOptionGroup(sodaFlavorOptionGroup, true, 1, false, 1, 1, chain.getCode(), null);
 
-        Option colaOption = new Option();
-        colaOption.setLabel("Cola");
-        colaOption.setCode("COLA_OPTION");
-        sodaFlavorOptionGroup.createHaveOption(colaOption, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
-        Option drPepperOption = new Option();
-        drPepperOption.setLabel("Dr Pepper");
-        drPepperOption.setCode("DR_PEPPER_OPTION");
-        sodaFlavorOptionGroup.createHaveOption(drPepperOption, 2, false, BigDecimal.ZERO, true, chain.getCode(), null);
+        OptionGroup beverageOptionGroup = new OptionGroup();
+        beverageOptionGroup.setLabel("Beverage");
+        beverageOptionGroup.setCode("BEVERAGE");
+        beverageOptionGroup.setType(OptionGroupType.OPTION_GROUP);
 
-        OptionGroup juiceFlavorOptionGroup = new OptionGroup();
-        juiceFlavorOptionGroup.setCode("JUICE_FLAVOR");
-        juiceFlavorOptionGroup.setLabel("Juice Flavor");
-        itemJuice.createHaveOptionGroup(juiceFlavorOptionGroup, true, 1, false, 1, 1, chain.getCode(), null);
 
-        Option orangeOption = new Option();
-        orangeOption.setLabel("Orange");
-        orangeOption.setCode("ORANGE_OPTION");
-        juiceFlavorOptionGroup.createHaveOption(orangeOption, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
+        /**
+         * Option Soda
+         */
+        Option optionSoda = new Option();
+        optionSoda.setLabel("Soda");
+        optionSoda.setCode("OPTION_SODA");
+        beverageOptionGroup.createHaveOption(optionSoda, 1, true, BigDecimal.ZERO, true, chain.getCode(), null);
 
-        Option lemonOption = new Option();
-        lemonOption.setLabel("Lemon");
-        lemonOption.setCode("LEMON_OPTION");
-        juiceFlavorOptionGroup.createHaveOption(lemonOption, 2, false, BigDecimal.ZERO, true, chain.getCode(), null);
+
+        OptionGroup optionGroupSoda = new OptionGroup();
+        optionGroupSoda.setType(OptionGroupType.ITEM);
+        optionGroupSoda.setCode("OPTION_GROUP_SODA");
+        optionGroupSoda.setLabel("Soda");
+        optionSoda.setOptionGroup(optionGroupSoda);
+
+        Option optionItemCola = new Option();
+        optionItemCola.setCode("OPTION_ITEM_COLA");
+        optionItemCola.setItem(itemCola);
+        optionItemCola.setLabel("Cola");
+        optionGroupSoda.createHaveOption(optionItemCola, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
+
+        Item itemDrPepper = new Item();
+        itemDrPepper.setCode("ITEM_DR_PEPPER");
+        itemDrPepper.setLabel("Dr Pepper");
+
+        Option optionItemDrPepper = new Option();
+        optionItemDrPepper.setCode("OPTION_ITEM_DR_PEPPER");
+        optionItemDrPepper.setLabel("Dr Pepper");
+        optionItemDrPepper.setItem(itemDrPepper);
+        optionGroupSoda.createHaveOption(optionItemDrPepper, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
+
+
+        /**
+         * Option Juice
+         */
+        Option optionJuice = new Option();
+        optionJuice.setLabel("Soda");
+        optionJuice.setCode("OPTION_SODA");
+        beverageOptionGroup.createHaveOption(optionJuice, 2, true, BigDecimal.ONE, true, chain.getCode(), null);
+
+
+        OptionGroup optionGroupJuice = new OptionGroup();
+        optionGroupJuice.setType(OptionGroupType.ITEM);
+        optionGroupJuice.setCode("OPTION_GROUP_SODA");
+        optionGroupJuice.setLabel("Soda");
+        optionJuice.setOptionGroup(optionGroupJuice);
+
+        Item itemOrangeJuice = new Item();
+        itemOrangeJuice.setCode("ITEM_ORANGE_JUICE");
+        itemOrangeJuice.setLabel("Orange");
+
+        Option optionOrangeJuice = new Option();
+        optionOrangeJuice.setCode("OPTION_ORANGE");
+        optionOrangeJuice.setItem(itemOrangeJuice);
+        optionOrangeJuice.setLabel("Orange");
+        optionGroupJuice.createHaveOption(optionOrangeJuice, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
+
+
+        Item itemLemonJuice = new Item();
+        itemLemonJuice.setCode("ITEM_LEMON_JUICE");
+        itemLemonJuice.setLabel("Lemon");
+
+        Option optionItemLemon = new Option();
+        optionItemLemon.setCode("OPTION_ITEM_DR_PEPPER");
+        optionItemLemon.setLabel("Dr Pepper");
+        optionItemLemon.setItem(itemLemonJuice);
+        optionGroupJuice.createHaveOption(optionItemLemon, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
+
+        comboN5.createHaveComboOptionGroup(beverageOptionGroup, false, 1, 1,true, 1,chain.getCode(), null);
+
 
         menuRepository.save(menuChain, -1);
         itemComboRepository.save(comboN5, -1);
-        optionRepository.save(lemonOption);
-        optionRepository.save(orangeOption);
-        optionGroupRepository.save(juiceFlavorOptionGroup);
-        optionRepository.save(drPepperOption);
-        optionRepository.save(colaOption);
-        optionGroupRepository.save(sodaFlavorOptionGroup);
-        itemRepository.save(itemJuice);
-        itemRepository.save(itemSoda);
-        itemGroupRepository.save(beverage);
-        itemRepository.save(onionRings);
-        itemGroupRepository.save(sideDishItemGroup);
+
+        optionGroupRepository.save(sideDishOptionGroup);
+        optionGroupRepository.save(optionGroupChipsTopics);
+        optionGroupRepository.save(optionGroupBurgerExtras);
+
+
+        optionGroupRepository.save(beverageOptionGroup);
+        optionGroupRepository.save(optionGroupSoda);
+        optionGroupRepository.save(optionGroupJuice);
+
+        optionRepository.save(optionOrangeJuice);
+        optionRepository.save(optionItemLemon);
+        optionRepository.save(onionsOption);
+        optionRepository.save(optionChips);
+
+        itemRepository.save(itemDrPepper);
+        itemRepository.save(itemCola);
+        itemRepository.save(itemLemonJuice);
+        itemRepository.save(itemOrangeJuice);
+
         itemComboRepository.save(comboN5);
         optionRepository.save(onionsOption);
         optionGroupRepository.save(optionGroupBurgerExtras);

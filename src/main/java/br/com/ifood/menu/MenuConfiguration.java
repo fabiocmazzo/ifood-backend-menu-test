@@ -40,7 +40,7 @@ public class MenuConfiguration {
     public RedissonClient redisson() {
         Config config = new Config();
         config.useSingleServer().setAddress(redisURI);
-        FstCodec serializationCodec = new FstCodec();
+        SerializationCodec serializationCodec = new SerializationCodec();
         config.setCodec(serializationCodec);
         return Redisson.create(config);
     }

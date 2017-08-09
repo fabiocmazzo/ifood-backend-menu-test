@@ -21,9 +21,6 @@ public class HaveComboOptionGroup {
     private Integer order;
 
     @Property
-    private String itemCode;
-
-    @Property
     private String chainCode;
 
     @Property
@@ -61,14 +58,6 @@ public class HaveComboOptionGroup {
 
     public void setOrder(Integer order) {
         this.order = order;
-    }
-
-    public String getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
     }
 
     public String getChainCode() {

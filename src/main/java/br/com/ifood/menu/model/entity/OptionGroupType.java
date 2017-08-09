@@ -27,9 +27,14 @@ public class OptionGroupType {
     public static final String FLAVOR = "FLAVOR";
 
     /**
-     * OptionGroupType for Dish Type.
+     * OptionGroupType for Option Item
      */
-    public static final String DISH_TYPE = "DISH_TYPE";
+    public static final String ITEM = "ITEM";
+
+    /**
+     * OptionGroupType for Option of OptionGroup
+     */
+    public static final String OPTION_GROUP = "OPTION_GROUP";
 
 
 }

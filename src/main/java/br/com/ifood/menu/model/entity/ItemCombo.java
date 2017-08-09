@@ -25,10 +25,6 @@ public class ItemCombo {
     private String code;
 
     @Relationship
-    private Set<HaveComboItemGroup> haveComboItemGroupSet;
-
-
-    @Relationship
     private Set<HaveComboItem> haveComboItemSet;
 
     @Relationship
@@ -101,22 +97,7 @@ public class ItemCombo {
     }
 
 
-    public Set<HaveComboItemGroup> getHaveComboItemGroupSet() {
-        return haveComboItemGroupSet;
-    }
-
-    public void setHaveComboItemGroupSet(Set<HaveComboItemGroup> haveComboItemGroupSet) {
-        this.haveComboItemGroupSet = haveComboItemGroupSet;
-    }
-
-    public void addHaveComboItemGroup(HaveComboItemGroup haveComboItemGroup) {
-        if (this.haveComboItemGroupSet == null) {
-            this.haveComboItemGroupSet = new HashSet<>();
-        }
-        haveComboItemGroupSet.add(haveComboItemGroup);
-    }
-
-    public void createHaveComboItem(Item item, Boolean available, BigDecimal additionalPrice, String itemGroupCode, Integer order, Integer qty, String chainCode, String restaurantCode) {
+   public void createHaveComboItem(Item item, Boolean available, BigDecimal additionalPrice, String itemGroupCode, Integer order, Integer qty, String chainCode, String restaurantCode) {
         HaveComboItem haveComboItem = new HaveComboItem();
         haveComboItem.setItem(item);
         haveComboItem.setQty(qty);
@@ -129,34 +110,18 @@ public class ItemCombo {
         haveComboItem.setItemCombo(this);
     }
 
-    public void createHaveComboOptionGroup(OptionGroup optionGroup, Boolean canRepeat, Integer minOptions, Integer maxOptions, String itemCode, Boolean available, Integer order, String chainCode, String restaurantCode) {
+    public void createHaveComboOptionGroup(OptionGroup optionGroup, Boolean canRepeat, Integer minOptions, Integer maxOptions, Boolean available, Integer order, String chainCode, String restaurantCode) {
         HaveComboOptionGroup haveComboOptionGroup = new HaveComboOptionGroup();
         haveComboOptionGroup.setOptionGroup(optionGroup);
         haveComboOptionGroup.setAvailable(available);
         haveComboOptionGroup.setItemCombo(this);
         haveComboOptionGroup.setChainCode(chainCode);
         haveComboOptionGroup.setRestaurantCode(restaurantCode);
-        haveComboOptionGroup.setItemCode(itemCode);
         haveComboOptionGroup.setCanRepeat(canRepeat);
         haveComboOptionGroup.setMinOptions(minOptions);
         haveComboOptionGroup.setMaxOptions(maxOptions);
         haveComboOptionGroup.setOrder(order);
         this.addHaveComboOptionGroup(haveComboOptionGroup);
-    }
-
-
-    public void createHaveComboItemGroup(ItemGroup itemGroup, Boolean canRepeat, Integer minOptions, Integer maxOptions, Boolean available, Integer order, String chainCode, String restaurantCode) {
-        HaveComboItemGroup havecomboItemGroup = new HaveComboItemGroup();
-        havecomboItemGroup.setItemGroup(itemGroup);
-        havecomboItemGroup.setAvailable(available);
-        havecomboItemGroup.setItemCombo(this);
-        havecomboItemGroup.setChainCode(chainCode);
-        havecomboItemGroup.setRestaurantCode(restaurantCode);
-        havecomboItemGroup.setCanRepeat(canRepeat);
-        havecomboItemGroup.setMinOptions(minOptions);
-        havecomboItemGroup.setMaxOptions(maxOptions);
-        havecomboItemGroup.setOrder(order);
-        this.addHaveComboItemGroup(havecomboItemGroup);
     }
 
 }

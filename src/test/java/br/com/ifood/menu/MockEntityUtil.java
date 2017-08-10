@@ -1,57 +1,26 @@
-package br.com.ifood.menu.service;
+package br.com.ifood.menu;
 
+import br.com.ifood.menu.dto.MenuDto;
 import br.com.ifood.menu.model.entity.*;
-import br.com.ifood.menu.model.relationship.*;
-import br.com.ifood.menu.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 
 /**
- * Service to create test data.
+ * Class to organize mock creation.
  *
  * @author Fabio Covolo Mazzo
  */
-@Service
-public class StartupService {
+public class MockEntityUtil {
 
-    @Autowired
-    private ChainRepository chainRepository;
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+    /**
+     * This method creats a menu with a ItemCombo with
+     * price for restaurant equals a 5 and for chain equals a 10.
+     *
+     * @return Menu menu
+     */
+    public static Menu createComboWithDifferentePrice() {
 
-    @Autowired
-    private MenuRepository menuRepository;
-
-    @Autowired
-    private ItemRepository itemRepository;
-
-    @Autowired
-    private OptionRepository optionRepository;
-
-    @Autowired
-    private OptionGroupRepository optionGroupRepository;
-
-    @Autowired
-    private ItemComboRepository itemComboRepository;
-
-    @Autowired
-    private ItemGroupRepository itemGroupRepository;
-
-    @Autowired
-    private CommonItemPoolRepository commonItemPoolRepository;
-
-    private void createFictionalRestaurantMenu() {
-
-        // If is already persisted, dont include again
-        Menu menuExists =  menuRepository.findRelated("Hitchhiker_Restaurant");
-
-        if(menuExists != null) {
-            return;
-        }
         /**
          * Chain
          */
@@ -91,8 +60,6 @@ public class StartupService {
         comboItemGroup.setCode("COMBOS");
         comboItemGroup.setLabel("Combos");
         menuChain.createHaveItemGroup(true, comboItemGroup, chain.getCode(), null);
-
-
 
 
         ItemGroup snacksGroup = new ItemGroup();
@@ -192,8 +159,8 @@ public class StartupService {
         // Vou colocar o combo no Chain a 7 reais e no restaurant a 17 reais, o que deve voltar pelo REST é o de 17 reais
         // vou deixar comentado a criação de um relacionamento para um código de outro restaurante que servirá para validar
         // que está retornando apenas o do Chain e do Restaurant pesquisado.
-        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("7"), chain.getCode(), null);
-        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("17"), null, restaurant.getCode());
+        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("10"), chain.getCode(), null);
+        comboItemGroup.createHaveItemCombo(comboN5, 1, true, new BigDecimal("5"), null, restaurant.getCode());
 
 
         OptionGroup sideDishOptionGroup = new OptionGroup();
@@ -224,7 +191,6 @@ public class StartupService {
         beverageOptionGroup.setLabel("Beverage");
         beverageOptionGroup.setCode("BEVERAGE");
         beverageOptionGroup.setType(OptionGroupType.OPTION_GROUP);
-
 
 
         /**
@@ -305,57 +271,10 @@ public class StartupService {
 
         optionGroupJuice.createHaveOption(optionItemLemon, 1, false, BigDecimal.ZERO, true, chain.getCode(), null);
 
-        comboN5.createHaveComboOptionGroup(beverageOptionGroup, false, 1, 1,true, 1,chain.getCode(), null);
+        comboN5.createHaveComboOptionGroup(beverageOptionGroup, false, 1, 1, true, 1, chain.getCode(), null);
 
-
-        menuRepository.save(menuChain, -1);
-        itemComboRepository.save(comboN5, -1);
-
-        optionGroupRepository.save(sideDishOptionGroup);
-        optionGroupRepository.save(optionGroupChipsTopics);
-        optionGroupRepository.save(optionGroupBurgerExtras);
-
-
-        optionGroupRepository.save(beverageOptionGroup);
-        optionGroupRepository.save(optionGroupSoda);
-        optionGroupRepository.save(optionGroupJuice);
-
-        optionRepository.save(optionOrangeJuice);
-        optionRepository.save(optionItemLemon);
-        optionRepository.save(onionsOption);
-        optionRepository.save(optionChips);
-
-        itemRepository.save(itemDrPepper);
-        itemRepository.save(itemCola);
-        itemRepository.save(itemLemonJuice);
-        itemRepository.save(itemOrangeJuice);
-
-        itemComboRepository.save(comboN5);
-        optionRepository.save(onionsOption);
-        optionGroupRepository.save(optionGroupBurgerExtras);
-        optionRepository.save(extraBurger);
-        optionRepository.save(salad);
-        optionGroupRepository.save(optionGroupBurgerExtras);
-        optionRepository.save(bacon);
-        optionGroupRepository.save(optionGroupChipsTopics);
-        itemRepository.save(itemCola);
-        itemRepository.save(itemDoubleCheeseBurger);
-        itemRepository.save(itemChips);
-        itemGroupRepository.save(drinksGroup);
-        itemGroupRepository.save(snacksGroup);
-        itemGroupRepository.save(burgersGroup);
-        itemGroupRepository.save(comboItemGroup);
-        menuRepository.save(menuChain);
-        restaurantRepository.save(restaurant);
-        chainRepository.save(chain);
+        return menuChain;
     }
 
-   private void createTestData() {
-        createFictionalRestaurantMenu();
-    }
 
-    @PostConstruct
-    public void init() {
-        createTestData();
-    }
 }

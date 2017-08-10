@@ -27,13 +27,13 @@ Containerize the application and use container orchestration is entirely feasibl
 
 
 
-### Query by restaurant code
+*Query by restaurant code
 MATCH (n:Restaurant) WHERE n.code = "RJOAO" WITH n MATCH p=(n)-[*0..]-(m) RETURN p
 
-## Query by a part of String in code property in Restaurant (like as SQL like query)
+*Query by a part of String in code property in Restaurant (like as SQL like query)
 MATCH(n:Restaurant) WHERE n.code CONTAINS ("MC") return n
 
-###  Update avaiable to true all HAVE_ITEM relationship
+*Update avaiable to true all HAVE_ITEM relationship
 MATCH (n:ItemGroup)-[r:HAVE_ITEM]-() set r.available = true
 
 

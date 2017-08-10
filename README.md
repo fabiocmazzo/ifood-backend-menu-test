@@ -36,7 +36,7 @@ MATCH (n:Restaurant) WHERE n.code = "RJOAO" WITH n MATCH p=(n)-[*0..]-(m) RETURN
 ```
 MATCH(n:Restaurant) WHERE n.code CONTAINS ("MC") return n
 ```
-*pdate avaiable to true all HAVE_ITEM relationship*
+*Update avaiable to true all HAVE_ITEM relationship*
 ```
 MATCH (n:ItemGroup)-[r:HAVE_ITEM]-() set r.available = true
 ```

@@ -13,4 +13,6 @@
   
   Basicamente, os dados foram representados dessa forma:
   
+  ![modelo de dados](https://github.com/fabiocmazzo/ifood-backend-menu-test/raw/master/documents/Ifood%20Menu%20Model.jpg)
+  
   
